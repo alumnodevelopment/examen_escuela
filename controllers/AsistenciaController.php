@@ -12,7 +12,7 @@ use MVC\Router;
 class AsistenciaController {
     public static function index(Router $router)
     {
-        $router->render('profesores/index', []);
+        $router->render('asistencia/index', []);
       
 }
 
