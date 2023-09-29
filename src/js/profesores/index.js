@@ -35,7 +35,7 @@ const datatable = new Datatable('#tablaProfesor', {
             data: 'profesor_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["profesor_nombre"]}'>Modificar</button>`
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["profesor_nombre"]}' data-telefono='${row["profesor_telefono"]}'>Modificar</button>`
         },
         {
             title: 'ELIMINAR',
@@ -95,6 +95,7 @@ const traeDatos = (e) => {
 
 const colocarDatos = (dataset) => {
     formulario.profesor_nombre.value = dataset.nombre;
+    formulario.profesor_telefono.value = dataset.telefono;
     formulario.profesor_id.value = dataset.id;
 
     btnGuardar.disabled = true;
