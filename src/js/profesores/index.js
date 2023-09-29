@@ -27,6 +27,10 @@ const datatable = new Datatable('#tablaProfesor', {
             data: 'profesor_nombre'
         },
         {
+            title: 'TELEFONO',
+            data: 'profesor_telefono'
+        },
+        {
             title: 'MODIFICAR',
             data: 'profesor_id',
             searchable: false,
@@ -73,9 +77,11 @@ const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
     const nombre = button.dataset.nombre;
+    const telefono = button.dataset.telefono;
     const dataset ={
         id,
-        nombre
+        nombre, 
+        telefono
     };
 
     colocarDatos(dataset);
@@ -83,6 +89,8 @@ const traeDatos = (e) => {
     const body = new FormData(formulario);
     body.append('profesor_id', id);
     body.append('profesor_nombre', nombre);
+    body.append('profesor_telefono', telefono);
+
 };
 
 const colocarDatos = (dataset) => {

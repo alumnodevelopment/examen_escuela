@@ -84,7 +84,7 @@ public static function eliminarAPI() {
     try {
         $profesorId = $_POST['profesor_id'];
         $profesor = Profesor::find($profesorId);
-        $resultado = $profesor->eliminar();
+        $resultado = $profesor->actualizar();
 
         if ($resultado['resultado'] == 1) {
             echo json_encode([
