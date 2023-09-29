@@ -1,6 +1,4 @@
-import { Dropdown } from "bootstrap";
-import Swal from "sweetalert2";
-import { validarFormulario, Toast, confirmacion } from "../funciones";
+import { Toast, confirmacion } from "../funciones";
 import Datatable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
 
@@ -10,12 +8,12 @@ const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnCancelar = document.getElementById('btnCancelar');
 
+let contador = 1;
 btnModificar.disabled = true;
 btnModificar.parentElement.style.display = 'none';
 btnCancelar.disabled = true;
 btnCancelar.parentElement.style.display = 'none';
 
-let contador = 1;
 const datatable = new Datatable('#tablaProfesor', {
     language: lenguaje,
     data: null,
@@ -25,36 +23,37 @@ const datatable = new Datatable('#tablaProfesor', {
             render: () => contador++
         },
         {
-            title: 'Nombre del Profesor',
+            title: 'NOMBRE',
             data: 'profesor_nombre'
-        },
-        {
-            title: 'Teléfono',
-            data: 'profesor_telefono'
         },
         {
             title: 'MODIFICAR',
             data: 'profesor_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["profesor_nombre"]}' data-telefono='${row["profesor_telefono"]}'>Modificar</button>`
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["profesor_nombre"]}'>Modificar</button>`
         },
         {
             title: 'ELIMINAR',
             data: 'profesor_id',
             searchable: false,
             orderable: false,
-            render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
+            render: (data, type, row, meta) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
         }
     ]
 });
 
 const buscar = async () => {
-    const profesorNombre = formulario.profesor_nombre.value;
-    const url = `/examen_escuela/API/profesores/buscar?profesor_nombre=${profesorNombre}`;
+    let profesor_nombre = formulario.profesor_nombre.value;
+    const url = `/examen_escuela/API/profesores/buscar?profesor_nombre=${profesor_nombre}`;
+    const config = {
+        method: 'GET'
+    };
     try {
-        const respuesta = await fetch(url);
+        const respuesta = await fetch(url, config);
         const data = await respuesta.json();
+
+        console.log(data);
         datatable.clear().draw();
         if (data) {
             contador = 1;
@@ -66,7 +65,7 @@ const buscar = async () => {
             });
         }
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 };
 
@@ -74,122 +73,20 @@ const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
     const nombre = button.dataset.nombre;
-    const telefono = button.dataset.telefono;
-
-    const dataset = {
+    const dataset ={
         id,
-        nombre,
-        telefono
+        nombre
     };
+
     colocarDatos(dataset);
-};
 
-const modificar = async (evento) => {
-    evento.preventDefault();
-    if (!validarFormulario(formulario)) {
-        Toast.fire({
-            icon: 'info',
-            text: 'Debe llenar todos los campos'
-        });
-        return;
-    }
     const body = new FormData(formulario);
-    const url = '/examen_escuela/API/profesores/modificar';
-    try {
-        const respuesta = await fetch(url, {
-            method: 'POST',
-            body
-        });
-        const data = await respuesta.json();
-        const { codigo, mensaje } = data;
-        let icon = 'info';
-        if (codigo === 1) {
-            formulario.reset();
-            icon = 'success';
-            buscar();
-            cancelarAccion();
-        } else {
-            icon = 'error';
-        }
-        Toast.fire({
-            icon,
-            text: mensaje
-        });
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const guardar = async (evento) => {
-    evento.preventDefault();
-    if (!validarFormulario(formulario)) {
-        Toast.fire({
-            icon: 'info',
-            text: 'Debe llenar todos los datos'
-        });
-        return;
-    }
-    const body = new FormData(formulario);
-    const url = '/examen_escuela/API/profesores/guardar';
-    try {
-        const respuesta = await fetch(url, {
-            method: 'POST',
-            body
-        });
-        const data = await respuesta.json();
-        const { codigo, mensaje } = data;
-        let icon = 'info';
-        if (codigo === 1) {
-            formulario.reset();
-            icon = 'success';
-            buscar();
-        } else {
-            icon = 'error';
-        }
-        Toast.fire({
-            icon,
-            text: mensaje
-        });
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-const eliminar = async (e) => {
-    const button = e.target;
-    const id = button.dataset.id;
-    if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
-        const body = new FormData();
-        body.append('profesor_id', id);
-        const url = '/examen_escuela/API/profesores/eliminar';
-        try {
-            const respuesta = await fetch(url, {
-                method: 'POST',
-                body
-            });
-            const data = await respuesta.json();
-            const { codigo, mensaje } = data;
-            let icon = 'info';
-            if (codigo === 1) {
-                icon = 'success';
-                buscar();
-            } else {
-                icon = 'error';
-            }
-            Toast.fire({
-                icon,
-                text: mensaje
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    body.append('profesor_id', id);
+    body.append('profesor_nombre', nombre);
 };
 
 const colocarDatos = (dataset) => {
     formulario.profesor_nombre.value = dataset.nombre;
-    formulario.profesor_telefono.value = dataset.telefono;
     formulario.profesor_id.value = dataset.id;
 
     btnGuardar.disabled = true;
@@ -203,7 +100,6 @@ const colocarDatos = (dataset) => {
 };
 
 const cancelarAccion = () => {
-    formulario.reset();
     btnGuardar.disabled = false;
     btnGuardar.parentElement.style.display = '';
     btnBuscar.disabled = false;
@@ -214,8 +110,139 @@ const cancelarAccion = () => {
     btnCancelar.parentElement.style.display = 'none';
 };
 
+const eliminar = async (e) => {
+    const button = e.target;
+    const id = button.dataset.id;
+
+    if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
+        const body = new FormData();
+        body.append('profesor_id', id);
+        const url = '/examen_escuela/API/profesores/eliminar';
+        const config = {
+            method: 'POST',
+            body
+        };
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+            console.log(data);
+            const { codigo, mensaje, detalle } = data;
+            let icon = 'info';
+            switch (codigo) {
+                case 1:
+                    icon = 'success';
+                    buscar();
+                    break;
+                case 0:
+                    icon = 'error';
+                    console.log(detalle);
+                    break;
+                default:
+                    break;
+            }
+            Toast.fire({
+                icon,
+                text: mensaje
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
+const modificar = async () => {
+    if (!formulario.checkValidity()) {
+        Toast.fire({
+            icon: 'info',
+            text: 'Debe llenar todos los campos'
+        });
+        return;
+    }
+
+    const body = new FormData(formulario);
+    const url = '/examen_escuela/API/profesores/modificar';
+    const config = {
+        method: 'POST',
+        body
+    };
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        const { codigo, mensaje, detalle } = data;
+        let icon = 'info';
+        switch (codigo) {
+            case 1:
+                formulario.reset();
+                icon = 'success';
+                buscar();
+                cancelarAccion();
+                break;
+            case 0:
+                icon = 'error';
+                console.log(detalle);
+                break;
+            default:
+                break;
+        }
+        Toast.fire({
+            icon,
+            text: mensaje
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const guardar = async (evento) => {
+    evento.preventDefault();
+    if (!formulario.checkValidity()) {
+        Toast.fire({
+            icon: 'info',
+            text: 'Debe llenar todos los datos'
+        });
+        return;
+    }
+    const body = new FormData(formulario);
+    body.delete('profesor_id');
+    const url = '/examen_escuela/API/profesores/guardar';
+    const config = {
+        method: 'POST',
+        body
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log(data);
+        const { codigo, mensaje, detalle } = data;
+        let icon = 'info';
+        switch (codigo) {
+            case 1:
+                formulario.reset();
+                icon = 'success';
+                buscar();
+                break;
+            case 0:
+                icon = 'error';
+                console.log(detalle);
+                break;
+            default:
+                break;
+        }
+        Toast.fire({
+            icon,
+            text: mensaje
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+buscar();
+
+datatable.on('click', '.btn-warning', traeDatos );
+datatable.on('click', '.btn-danger', eliminar);
 formulario.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
-datatable.on('click', '.btn-warning', traeDatos);
-datatable.on('click', '.btn-danger', eliminar);
+btnModificar.addEventListener('click', modificar);

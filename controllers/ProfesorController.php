@@ -16,8 +16,8 @@ class ProfesorController {
 
 public static function guardarAPI() {
     try {
-        $nombre = $_POST["profesor_nombre"];
-        $telefono = $_POST["profesor_telefono"];
+        $nombre = $_POST['profesor_nombre'];
+        $telefono = $_POST['profesor_telefono'];
 
         $profesor = new Profesor([
             'profesor_nombre' => $nombre,
@@ -26,7 +26,7 @@ public static function guardarAPI() {
 
         $resultado = $profesor->crear();
 
-        if ($resultado['resultado'] == 1) {
+        if ($resultado['resultado'] === 1) {
             echo json_encode([
                 'mensaje' => 'Registro guardado correctamente',
                 'codigo' => 1
@@ -49,8 +49,8 @@ public static function guardarAPI() {
 public static function modificarAPI() {
     try {
         $profesorId = $_POST['profesor_id'];
-        $nombre = $_POST["profesor_nombre"];
-        $telefono = $_POST["profesor_telefono"];
+        $nombre = $_POST['profesor_nombre'];
+        $telefono = $_POST['profesor_telefono'];
 
         $profesor = new Profesor([
             'profesor_id' => $profesorId,

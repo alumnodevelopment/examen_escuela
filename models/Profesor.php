@@ -18,6 +18,6 @@ class Profesor extends ActiveRecord
         $this->profesor_id = $args['profesor_id'] ?? null;
         $this->profesor_nombre = $args['profesor_nombre'] ?? '';
         $this->profesor_telefono = $args['profesor_telefono'] ?? '';
-        $this->profesor_situacion = $args['profesor_situacion'] ?? '1';
+        $this->profesor_situacion = $args['profesor_situacion'] ?? 1;
     }
 }
