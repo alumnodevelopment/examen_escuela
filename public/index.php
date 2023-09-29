@@ -12,8 +12,12 @@ $router->setBaseURL('/' . $_ENV['APP_NAME']);
 $router->get('/', [AppController::class,'index']);
 
 //tutores
-
 $router->get('/tutores', [TutorController::class,'index']);
+$router->post('/API/tutores/guardar', [TutorController::class,'guardarAPI'] );
+$router->post('/API/tutores/modificar', [TutorController::class,'modificarAPI'] );
+$router->post('/API/tutores/eliminar', [TutorController::class,'eliminarAPI'] );
+$router->get('/API/tutores/buscar', [TutorController::class,'buscarAPI'] );
+
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
