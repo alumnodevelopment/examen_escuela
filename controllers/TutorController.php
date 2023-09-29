@@ -115,6 +115,27 @@ public static function eliminarAPI(){
         ]);
     }
 }
+public static function buscarAlumno(){
+    $sql = "SELECT alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
+
+    try {
+        // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
+        $alumnos = Tutor::fetchArray($sql);
+
+    
+
+        // Enviar la respuesta como un objeto JSON
+        echo json_encode($alumnos);
+    } catch (Exception $e) {
+        // En caso de error, enviar un JSON con información del error
+        // header('Content-Type: application/json');
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0
+        ]);
+    }
+}
 
 public static function buscarAPI(){
     $tutorNombre = $_GET['tutor_nombre'] ?? '';
