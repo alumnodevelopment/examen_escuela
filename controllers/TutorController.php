@@ -8,10 +8,11 @@ use MVC\Router;
 
 
 class TutorController {
-    public static function index(Router $router){
-
-        $router->render('tutores/index'[]);
-    }
+    public static function index(Router $router)
+    {
+        $router->render('tutores/index', []);
+      
 }
 
+}
 
