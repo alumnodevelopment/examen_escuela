@@ -24,12 +24,6 @@
         </div>
         <div class="row mb-3">
             <div class="col">
-                <label for="tutor_situacion">Situación</label>
-                <input type="text" name="tutor_situacion" id="tutor_situacion" class="form-control">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
                 <button type="submit" form="formularioTutor" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
             </div>
             <div class="col">
