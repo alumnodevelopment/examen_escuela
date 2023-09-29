@@ -17,10 +17,18 @@
                 <label for="tutor_parentezco">Parentezco</label>
                 <input type="text" name="tutor_parentezco" id="tutor_parentezco" class="form-control">
             </div>
-            <div class="col">
-                <label for="alumno_id">ID del Alumno Relacionado</label>
-                <input type="text" name="alumno_id" id="alumno_id" class="form-control">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="alumno_id">Alumno Relacionado</label>
+                    <select name="alumno_id" id="alumno_id" class="form-control">
+                        <option value="">Seleccione un alumno</option>
+                        <?php foreach ($alumnos as $alumno) : ?>
+                            <option value="<?php echo $alumno->alumno_id; ?>"><?php echo $alumno->alumno_nombre; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
             </div>
+
         </div>
         <div class="row mb-3">
             <div class="col">
