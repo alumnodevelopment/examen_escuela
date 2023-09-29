@@ -14,12 +14,6 @@
         </div>
         <div class="row mb-3">
             <div class="col">
-                <label for="profesor_situacion">Situación</label>
-                <input type="number" name="profesor_situacion" id="profesor_situacion" class="form-control">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
                 <button type="submit" form="formularioProfesor" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
             </div>
             <div class="col">
