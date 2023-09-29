@@ -2,7 +2,7 @@ import '../scss/app.scss';
 
 document.addEventListener('DOMContentLoaded', (e)=> {
     const dropdown = document.querySelector('.dropdown-menu');
-    dropdown.style.margin = 0;
+    dropdown ? dropdown.style.margin = 0 : null;
 
 
     let items = document.querySelectorAll('.nav-link')
