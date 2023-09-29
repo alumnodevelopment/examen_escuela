@@ -115,6 +115,26 @@ public static function eliminarAPI(){
         ]);
     }
 }
+
+public static function buscarAPI(){
+    $tutorNombre = $_GET['tutor_nombre'] ?? '';
+    $sql = "SELECT * FROM tutores WHERE tutor_situacion = 1 ";
+    if ($tutorNombre != '') {
+        $tutorNombre = strtolower($tutorNombre);
+        $sql .= " AND LOWER(tutor_nombre) LIKE '%$tutorNombre%' ";
+    }
+
+    try {
+        $tutores = Tutor::fetchArray($sql);
+        echo json_encode($tutores);
+    } catch (Exception $e) {
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0
+        ]);
+    }
+}
 public static function buscarAlumno(){
     $sql = "SELECT alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
 
@@ -129,26 +149,6 @@ public static function buscarAlumno(){
     } catch (Exception $e) {
         // En caso de error, enviar un JSON con información del error
         // header('Content-Type: application/json');
-        echo json_encode([
-            'detalle' => $e->getMessage(),
-            'mensaje' => 'Ocurrió un error',
-            'codigo' => 0
-        ]);
-    }
-}
-
-public static function buscarAPI(){
-    $tutorNombre = $_GET['tutor_nombre'] ?? '';
-    $sql = "SELECT * FROM tutores WHERE tutor_situacion = 1 ";
-    if ($tutorNombre != '') {
-        $tutorNombre = strtolower($tutorNombre);
-        $sql .= " AND LOWER(tutor_nombre) LIKE '%$tutorNombre%' ";
-    }
-
-    try {
-        $tutores = Tutor::fetchArray($sql);
-        echo json_encode($tutores);
-    } catch (Exception $e) {
         echo json_encode([
             'detalle' => $e->getMessage(),
             'mensaje' => 'Ocurrió un error',
