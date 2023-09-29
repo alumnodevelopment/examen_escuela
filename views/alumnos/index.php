@@ -1,7 +1,7 @@
 <h1 class="text-center">Registro de alumnos</h1>
     <div class="container">
         <div class="row justify-content-center mb-5">
-            <form class="col-lg-8 border bg-light p-3" id="formularioAlumnos">
+            <form class="col-lg-8 border bg-light p-3" id="formularioAlumnos" accept-charset="UTF-8">
                 <input type="hidden" name="alumno_id" id="alumno_id">
                 <div class="row mb-3">
                     <div class="col-md-6">
