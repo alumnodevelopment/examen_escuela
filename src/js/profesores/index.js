@@ -4,7 +4,7 @@ import { validarFormulario, Toast, confirmacion } from "../funciones";
 import Datatable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
 
-const formulario = document.querySelector('form');
+const formulario = document.getElementById('formularioProfesor');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
@@ -119,6 +119,42 @@ const modificar = async (evento) => {
         console.error(error);
     }
 };
+
+const guardar = async (evento) => {
+    evento.preventDefault();
+    if (!validarFormulario(formulario)) {
+        Toast.fire({
+            icon: 'info',
+            text: 'Debe llenar todos los datos'
+        });
+        return;
+    }
+    const body = new FormData(formulario);
+    const url = '/examen_escuela/API/profesores/guardar';
+    try {
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            body
+        });
+        const data = await respuesta.json();
+        const { codigo, mensaje } = data;
+        let icon = 'info';
+        if (codigo === 1) {
+            formulario.reset();
+            icon = 'success';
+            buscar();
+        } else {
+            icon = 'error';
+        }
+        Toast.fire({
+            icon,
+            text: mensaje
+        });
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 
 const eliminar = async (e) => {
     const button = e.target;
