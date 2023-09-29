@@ -1,4 +1,4 @@
-<h1 class="text-center">GRADOS</h1>
+<h1 class="text-center">SECCIONES</h1>
 <div class="row justify-content-center mb-5">
     <form class="col-lg-8 border bg-light p-3" id="formularioSeccion">
         <input type="hidden" name="seccion_id" id="seccion_id">
@@ -30,8 +30,8 @@
 <!-- <h1>Listado de Empleados</h1> -->
 <div class="row justify-content-center">
     <div class="col table-responsive">
-        <table id="tablaGrados" class="table table-bordered table-hover">
+        <table id="tablaSecciones" class="table table-bordered table-hover">
         </table>
     </div>
 </div>
-<script src="<?= asset('./build/js/grados/index.js') ?>"></script>
+<script src="<?= asset('./build/js/secciones/index.js') ?>"></script>

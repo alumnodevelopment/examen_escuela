@@ -35,7 +35,7 @@ const datatable = new Datatable('#tablaGrados', {
             data: 'grado_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["grado_nombre"]}'>Modificar</button>`},
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["grado_nombre"]}'>Modificar< /button>`},
         {
             title: 'ELIMINAR',
             data: 'grado_id',

@@ -74,9 +74,9 @@ class SeccionController
     {
         try {
             $seccion_id = $_POST['seccion_id'];
-            $grado = Seccion::find($seccion_id);
-            $grado->grado_situacion = 0;
-            $resultado = $grado->actualizar();
+            $seccion = Seccion::find($seccion_id);
+            $seccion->seccion_situacion = 0;
+            $resultado = $seccion->actualizar();
 
             if ($resultado['resultado'] == 1) {
                 echo json_encode([
