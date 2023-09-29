@@ -10,7 +10,7 @@ use MVC\Router;
 class ProfesorController {
     public static function index(Router $router)
     {
-        $router->render('profesor/index', []);
+        $router->render('profesores/index', []);
       
 }
 
