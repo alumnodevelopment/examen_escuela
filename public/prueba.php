@@ -1,2 +1,0 @@
-<?php
-hola mundo
