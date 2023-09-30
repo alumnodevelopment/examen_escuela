@@ -116,7 +116,7 @@ public static function eliminarAPI(){
         ]);
     }
 }
-
+//se agrego la ruta buscar API PARA QUE APAREZCA EL NOMBRE EN LUGAR DEL ID 
 public static function buscarAPI(){
     $tutorNombre = $_GET['tutor_nombre'] ?? '';
     $sql = "SELECT t.tutor_id, 
