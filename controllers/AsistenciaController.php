@@ -220,7 +220,7 @@ public static function buscarSeccionAPI(){
 
 
 public static function buscarAlumnosAPI(){
-    $sql = "SELECT alumno_id, alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
+    $sql = "SELECT alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
 
     try {
         // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)

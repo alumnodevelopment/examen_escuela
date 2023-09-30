@@ -35,11 +35,11 @@ const datatable = new Datatable('#tablaAsistencia', {
         },
         {
             title: 'Alumno',
-            data: 'Alumno_nombre'
+            data: 'alumno_nombre'
 
         }, 
         {
-            title: 'Alumno',
+            title: 'Alumno Nombre',
             data: 'alumno_id'
         },
         {
@@ -236,6 +236,7 @@ const traeDatos = (e) => {
     const grado = button.dataset.grado;
     const seccion = button.dataset.seccion;
     const alumno = button.dataset.alumno;
+    const alumno_nombre = button.dataset.alumno_nombre;
     const fecha = button.dataset.fecha;
 
     const dataset = {
@@ -243,6 +244,7 @@ const traeDatos = (e) => {
         grado,
         seccion,
         alumno,
+        alumno_nombre,
         fecha
     };
     colocarDatos(dataset);
@@ -251,6 +253,7 @@ const colocarDatos = (dataset) => {
     formulario.grado_id.value = dataset.grado;
     formulario.seccion_id.value = dataset.seccion;
     formulario.alumno_id.value = dataset.alumno;
+    formulario.alumno_nombre.value = dataset.alumno_nombre;
     formulario.asistencia_fecha.value = dataset.fecha;
     formulario.asistencia_id.value = dataset.id;
 
@@ -277,8 +280,7 @@ const cancelarAccion = () => {
 };
 
 const buscarAlumnos = async () => {
-    const grado_id = formulario.grado_id.value;
-    const seccion_id = formulario.seccion_id.value;
+  
 
     const url = `/examen_escuela/API/asistencia/buscarAlumnos`;
     try {
@@ -298,7 +300,7 @@ const buscarAlumnos = async () => {
         console.error(error);
     }
 };
-
+buscarAlumnos();
 formulario.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
