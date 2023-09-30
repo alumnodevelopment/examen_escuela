@@ -4,25 +4,41 @@
         <form class="col-lg-8 border bg-light p-3" id="formularioAsistencia">
             <input type="hidden" name="asistencia_id" id="asistencia_id">
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="alumno_id">Alumno</label>
-                    <select name="alumno_id" id="alumno_id" class="form-control">
+                <div class="col-md-4">
+                    <label for="asistencia_fecha">Fecha de Asistencia</label>
+                    <input type="date" name="asistencia_fecha" id="asistencia_fecha" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="grado_id">Grado</label>
+                    <select name="grado_id" id="grado_id" class="form-control" required>
                         <option value="">SELECCIONE...</option>
-                        <?php foreach ($alumnos as $alumno) : ?>
-                            <option value="<?= $alumno['alumno_id'] ?>">
-                                <?= $alumno['alumno_nombre'] ?></option>
+                        <?php foreach ($grados as $grado) : ?>
+                            <option value="<?= $grado['grado_id'] ?>">
+                                <?= $grado['nombre_grado'] ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
-                <div class="col-md-6">
-                    <label for="asistencia_fecha">Fecha de Asistencia</label>
-                    <input type="date" name="asistencia_fecha" id="asistencia_fecha" class="form-control">
+                <div class="col-md-4">
+                    <label for="seccion_id">Sección</label>
+                    <select name="seccion_id" id="seccion_id" class="form-control" required>
+                        <option value="">SELECCIONE...</option>
+                        <?php foreach ($secciones as $seccion) : ?>
+                            <option value="<?= $seccion['seccion_id'] ?>">
+                                <?= $seccion['nombre_seccion'] ?></option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
+                    <label for="alumno_id">Alumno</label>
+                    <select name="alumno_id" id="alumno_id" class="form-control" required>
+                        <option value="">SELECCIONE...</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
                     <label for="asistencia_asistio">Asistencia</label>
-                    <select name="asistencia_asistio" id="asistencia_asistio" class="form-control">
+                    <select name="asistencia_asistio" id="asistencia_asistio" class="form-control" required>
                         <option value="presente">Presente</option>
                         <option value="ausente">Ausente</option>
                     </select>
