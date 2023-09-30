@@ -170,7 +170,7 @@ public static function buscarAPI() {
 }
 
 
-public static function buscarGrado(){
+public static function buscarGradoAPI(){
     $sql = "SELECT grado_id, grado_nombre FROM grados WHERE grado_situacion = 1";
 
     try {
@@ -194,7 +194,7 @@ public static function buscarGrado(){
     }
 }
 
-public static function buscarSeccion(){
+public static function buscarSeccionAPI(){
     $sql = "SELECT seccion_id, seccion_nombre FROM secciones WHERE seccion_situacion = 1";
 
     try {

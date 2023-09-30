@@ -35,6 +35,11 @@ const datatable = new Datatable('#tablaAsistencia', {
         },
         {
             title: 'Alumno',
+            data: 'Alumno_nombre'
+
+        }, 
+        {
+            title: 'Alumno',
             data: 'alumno_id'
         },
         {
