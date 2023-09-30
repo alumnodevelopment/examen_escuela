@@ -11,6 +11,8 @@ module.exports = {
     'js/alumnos/index' : './src/js/alumnos/index.js',
     'js/tutores/index' : './src/js/tutores/index.js',
     'js/profesores/index' : './src/js/profesores/index.js',
+    'js/conductas/index' : './src/js/conductas/index.js',
+
 
 
   },
