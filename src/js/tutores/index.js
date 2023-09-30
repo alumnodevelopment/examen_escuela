@@ -48,7 +48,7 @@ const datatable = new Datatable('#tablaTutor', {
             data: 'tutor_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["tutor_nombre"]}' data-telefono='${row["tutor_telefono"]}' data-parentezco='${row["tutor_parentezco"]}' data-alumno='${row["alumno_id"]}' data-situacion='${row["tutor_situacion"]}'>Modificar</button>`
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["tutor_nombre"]}' data-telefono='${row["tutor_telefono"]}' data-parentezco='${row["tutor_parentezco"]}' data-alumno='${row["alumno_id"]}'>Modificar</button>`
         },
         {
             title: 'ELIMINAR',
@@ -112,23 +112,22 @@ const guardar = async (evento) => {
     const tutorTelefono = document.getElementById("tutor_telefono").value;
     const tutorParentezco = document.getElementById("tutor_parentezco").value;
 
-    // Verificar si se ha seleccionado un alumno
-    // if (alumnoId === "") {
-    //     Toast.fire({
-    //         icon: 'info',
-    //         text: 'Por favor, seleccione un alumno'
-    //     });
-    //     return;
-    // }
-
-
-    if (!validarFormulario(formulario)) {
+    if (alumnoSelect.value === "" || tutorNombre === "" || tutorTelefono === "" || tutorParentezco === "") {
         Toast.fire({
             icon: 'info',
-            text: 'Debe llenar todos los datos'
+            text: 'Por favor, llene todos los campos'
         });
         return;
     }
+
+
+    // if (!validarFormulario(formulario)) {
+    //     Toast.fire({
+    //         icon: 'info',
+    //         text: 'Debe llenar todos los datos'
+    //     });
+    //     return;
+    // }
 
     const formData = new FormData();
     formData.append("tutor_nombre", tutorNombre);
@@ -170,7 +169,7 @@ const traeDatos = (e) => {
     const telefono = button.dataset.telefono;
     const parentezco = button.dataset.parentezco;
     const alumno = button.dataset.alumno;
-    const situacion = button.dataset.situacion;
+
 
     const dataset = {
         id,
@@ -178,7 +177,7 @@ const traeDatos = (e) => {
         telefono,
         parentezco,
         alumno,
-        situacion
+      
     };
     colocarDatos(dataset);
 };
@@ -257,7 +256,6 @@ const colocarDatos = (dataset) => {
     formulario.tutor_telefono.value = dataset.telefono;
     formulario.tutor_parentezco.value = dataset.parentezco;
     formulario.alumno_id.value = dataset.alumno;
-    formulario.tutor_situacion.value = dataset.situacion;
     formulario.tutor_id.value = dataset.id;
 
     btnGuardar.disabled = true;
@@ -285,5 +283,6 @@ const cancelarAccion = () => {
 formulario.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
+btnModificar.addEventListener('click', modificar);
 datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);

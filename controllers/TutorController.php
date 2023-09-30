@@ -119,7 +119,16 @@ public static function eliminarAPI(){
 
 public static function buscarAPI(){
     $tutorNombre = $_GET['tutor_nombre'] ?? '';
-    $sql = "SELECT * FROM tutores WHERE tutor_situacion = 1 ";
+    $sql = "SELECT t.tutor_id, 
+    t.tutor_nombre, 
+    t.tutor_telefono, 
+    t.tutor_parentezco, 
+    a.alumno_nombre AS alumno_id, 
+    t.tutor_situacion
+FROM tutores t
+JOIN alumnos a ON t.alumno_id = a.alumno_id
+WHERE t.tutor_situacion = 1;
+";
     if ($tutorNombre != '') {
         $tutorNombre = strtolower($tutorNombre);
         $sql .= " AND LOWER(tutor_nombre) LIKE '%$tutorNombre%' ";
