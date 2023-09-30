@@ -36,13 +36,6 @@
                         <option value="">SELECCIONE...</option>
                     </select>
                 </div>
-                <div class="col-md-6">
-                    <label for="asistencia_asistio">Asistencia</label>
-                    <select name="asistencia_asistio" id="asistencia_asistio" class="form-control" required>
-                        <option value="presente">Presente</option>
-                        <option value="ausente">Ausente</option>
-                    </select>
-                </div>
             </div>
             <div class="row ">
                 <div class="col">

@@ -38,6 +38,9 @@ $router->post('/API/profesores/modificar', [ProfesorController::class,'modificar
 $router->post('/API/profesores/eliminar', [ProfesorController::class,'eliminarAPI'] );
 $router->get('/API/profesores/buscar', [ProfesorController::class,'buscarAPI'] );
 
+//asistencia
+$router->get('/asistencia', [AsistenciaController::class,'index']);
+
 
 $router->get('/grados/datatable', [GradoController::class,'datatable']);
 $router->post('/API/grados/guardar', [GradoController::class,'guardarAPI'] );
