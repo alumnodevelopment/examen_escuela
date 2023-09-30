@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Exception;
 use Model\Tutor;
+use Model\Alumno;
 use MVC\Router;
 
 
@@ -115,10 +116,19 @@ public static function eliminarAPI(){
         ]);
     }
 }
-
+//se agrego la ruta buscar API PARA QUE APAREZCA EL NOMBRE EN LUGAR DEL ID 
 public static function buscarAPI(){
     $tutorNombre = $_GET['tutor_nombre'] ?? '';
-    $sql = "SELECT * FROM tutores WHERE tutor_situacion = 1 ";
+    $sql = "SELECT t.tutor_id, 
+    t.tutor_nombre, 
+    t.tutor_telefono, 
+    t.tutor_parentezco, 
+    a.alumno_nombre AS alumno_id, 
+    t.tutor_situacion
+FROM tutores t
+JOIN alumnos a ON t.alumno_id = a.alumno_id
+WHERE t.tutor_situacion = 1;
+";
     if ($tutorNombre != '') {
         $tutorNombre = strtolower($tutorNombre);
         $sql .= " AND LOWER(tutor_nombre) LIKE '%$tutorNombre%' ";
@@ -135,20 +145,36 @@ public static function buscarAPI(){
         ]);
     }
 }
-public static function buscarAlumno(){
-    $sql = "SELECT alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
+// public static function buscarAlumno(){
+//     $sql = "SELECT alumno_id, alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
+
+//     try {
+//         // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
+//         $alumnos = Alumno::fetchArray($sql);
+
+//         // Enviar la respuesta como un objeto JSON
+//         echo json_encode($alumnos);
+//     } catch (Exception $e) {
+//         // En caso de error, enviar un JSON con información del error
+//         // header('Content-Type: application/json');
+//         echo json_encode([
+//             'detalle' => $e->getMessage(),
+//             'mensaje' => 'Ocurrió un error',
+//             'codigo' => 0
+//         ]);
+//     }
+// }
+
+public static function buscarAlumnoAPI(){
+    $sql = "SELECT alumno_id, alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
 
     try {
         // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
-        $alumnos = Tutor::fetchArray($sql);
-
-    
+        $alumnos = Alumno::fetchArray($sql);
 
         // Enviar la respuesta como un objeto JSON
         echo json_encode($alumnos);
     } catch (Exception $e) {
-        // En caso de error, enviar un JSON con información del error
-        // header('Content-Type: application/json');
         echo json_encode([
             'detalle' => $e->getMessage(),
             'mensaje' => 'Ocurrió un error',
@@ -156,6 +182,7 @@ public static function buscarAlumno(){
         ]);
     }
 }
+
 
 }
 

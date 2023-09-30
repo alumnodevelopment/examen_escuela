@@ -12,9 +12,11 @@ export const validarFormulario = (formulario, excepciones = [] ) => {
         }
     });
 
-    let noenviar = validarFormulario.includes(false);
+    return validarFormulario.length === 0; 
+    
+    // let noenviar = validarFormulario.includes(false);
 
-    return !noenviar;
+    // return !noenviar;
 }
 
 export const Toast = Swal.mixin({
