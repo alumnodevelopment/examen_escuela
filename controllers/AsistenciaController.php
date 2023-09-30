@@ -223,15 +223,41 @@ public static function buscarAlumnosAPI(){
     $sql = "SELECT alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
 
     try {
-        // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
+      
         $alumno = Alumno::fetchArray($sql);
 
     
 
-        // Enviar la respuesta como un objeto JSON
+   
         echo json_encode($alumno);
 
         //echo json_encode(['seccion' => $seccion]);
+    } catch (Exception $e) {
+        // En caso de error, enviar un JSON con información del error
+        header('Content-Type: application/json');
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0
+        ]);
+    }
+}
+
+
+public static function buscarGradosSecciones(){
+
+    $sql = "SELECT grados.grado_nombre, secciones.seccion_nombre, alumnos.alumno_nombre 
+            FROM grados 
+            INNER JOIN asignacion_grados ON grados.grado_id = asignacion_grados.grado_id 
+            INNER JOIN secciones ON asignacion_grados.seccion_id = secciones.seccion_id 
+            INNER JOIN alumnos ON asignacion_grados.alumno_id = alumnos.alumno_id 
+            WHERE grados.grado_situacion = 1 AND secciones.seccion_situacion = 1 AND alumnos.alumno_situacion = 1";
+
+try {
+      
+    $resultado = Grado::fetchArray($sql);
+
+    echo json_encode($resultado);
     } catch (Exception $e) {
         // En caso de error, enviar un JSON con información del error
         header('Content-Type: application/json');
