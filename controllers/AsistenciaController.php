@@ -219,5 +219,30 @@ public static function buscarSeccionAPI(){
 }
 
 
+public static function buscarAlumnosAPI(){
+    $sql = "SELECT alumno_id, alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
+
+    try {
+        // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
+        $alumno = Alumno::fetchArray($sql);
+
+    
+
+        // Enviar la respuesta como un objeto JSON
+        echo json_encode($alumno);
+
+        //echo json_encode(['seccion' => $seccion]);
+    } catch (Exception $e) {
+        // En caso de error, enviar un JSON con información del error
+        header('Content-Type: application/json');
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0
+        ]);
+    }
+}
+
+
 
 }
