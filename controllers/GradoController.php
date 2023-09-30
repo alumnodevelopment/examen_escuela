@@ -1,4 +1,4 @@
- <?php
+<?php
 
 namespace Controllers;
 
@@ -6,7 +6,8 @@ use Exception;
 use Model\Grado;
 use MVC\Router;
 
-class GradoController
+
+class SeccionController
 {
     public static function datatable(Router $router){
         if(isset($_SESSION['auth_user'])){
