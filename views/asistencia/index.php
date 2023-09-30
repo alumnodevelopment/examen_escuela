@@ -14,7 +14,7 @@
                         <option value="">SELECCIONE...</option>
                         <?php foreach ($grados as $grado) : ?>
                             <option value="<?= $grado['grado_id'] ?>">
-                                <?= $grado['nombre_grado'] ?></option>
+                                <?= $grado['grado_nombre'] ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
@@ -24,7 +24,7 @@
                         <option value="">SELECCIONE...</option>
                         <?php foreach ($secciones as $seccion) : ?>
                             <option value="<?= $seccion['seccion_id'] ?>">
-                                <?= $seccion['nombre_seccion'] ?></option>
+                                <?= $seccion['seccion_nombre'] ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>

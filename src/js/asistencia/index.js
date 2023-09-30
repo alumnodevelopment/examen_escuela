@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const gradoSelect = document.getElementById("grado_id");
 
     try {
-        const respuesta = await fetch('/examen_escuela/API/tutores/buscarGrado');
-        const grados = await respuesta.json();
+        const respuesta = await fetch('/examen_escuela/API/asistencia/buscarGrado');
+        const grados = await respuesta.text();
 
         grados.forEach(grado => {
             const option = document.createElement("option");
@@ -77,23 +77,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const seccionSelect = document.getElementById("seccion_id");
+// document.addEventListener("DOMContentLoaded", async () => {
+//     const seccionSelect = document.getElementById("seccion_id");
 
-    try {
-        const respuesta = await fetch('/examen_escuela/API/tutores/buscarSeccion');
-        const secciones = await respuesta.json();
+//     try {
+//         const respuesta = await fetch('/examen_escuela/API/asistencia/buscarSeccion');
+//         const secciones = await respuesta.json();
 
-        secciones.forEach(seccion => {
-            const option = document.createElement("option");
-            option.value = seccion.seccion_id;
-            option.textContent = seccion.seccion_nombre;
-            seccionSelect.appendChild(option);
-        });
-    } catch (error) {
-        console.error(error);
-    }
-});
+//         secciones.forEach(seccion => {
+//             const option = document.createElement("option");
+//             option.value = seccion.seccion_id;
+//             option.textContent = seccion.seccion_nombre;
+//             seccionSelect.appendChild(option);
+//         });
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
 
 
 const buscar = async () => {
