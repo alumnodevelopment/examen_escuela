@@ -171,7 +171,7 @@ public static function buscarAPI() {
 
 
 public static function buscarGrado(){
-    $sql = "SELECT grado_nombre FROM grados WHERE grado_situacion = 1";
+    $sql = "SELECT grado_id, grado_nombre FROM grados WHERE grado_situacion = 1";
 
     try {
         // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
@@ -181,9 +181,11 @@ public static function buscarGrado(){
 
         // Enviar la respuesta como un objeto JSON
         echo json_encode($grados);
+
+        //echo json_encode(['grados' => $grados]);
     } catch (Exception $e) {
         // En caso de error, enviar un JSON con información del error
-        // header('Content-Type: application/json');
+        header('Content-Type: application/json');
         echo json_encode([
             'detalle' => $e->getMessage(),
             'mensaje' => 'Ocurrió un error',
@@ -193,7 +195,7 @@ public static function buscarGrado(){
 }
 
 public static function buscarSeccion(){
-    $sql = "SELECT seccion_nombre FROM secciones WHERE seccion_situacion = 1";
+    $sql = "SELECT seccion_id, seccion_nombre FROM secciones WHERE seccion_situacion = 1";
 
     try {
         // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
@@ -203,9 +205,11 @@ public static function buscarSeccion(){
 
         // Enviar la respuesta como un objeto JSON
         echo json_encode($seccion);
+
+        //echo json_encode(['seccion' => $seccion]);
     } catch (Exception $e) {
         // En caso de error, enviar un JSON con información del error
-        // header('Content-Type: application/json');
+        header('Content-Type: application/json');
         echo json_encode([
             'detalle' => $e->getMessage(),
             'mensaje' => 'Ocurrió un error',

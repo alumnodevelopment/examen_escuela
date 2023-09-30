@@ -64,8 +64,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         const respuesta = await fetch('/examen_escuela/API/asistencia/buscarGrado');
-        const grados = await respuesta.text();
-
+        const grados = await respuesta.json();
+        console.log(grados);
+        // return;
         grados.forEach(grado => {
             const option = document.createElement("option");
             option.value = grado.grado_id;
@@ -73,27 +74,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             gradoSelect.appendChild(option);
         });
     } catch (error) {
-        console.error(error);
+        console.error('Error al obtener datos:', error);
     }
 });
 
-// document.addEventListener("DOMContentLoaded", async () => {
-//     const seccionSelect = document.getElementById("seccion_id");
+document.addEventListener("DOMContentLoaded", async () => {
+    const seccionSelect = document.getElementById("seccion_id");
 
-//     try {
-//         const respuesta = await fetch('/examen_escuela/API/asistencia/buscarSeccion');
-//         const secciones = await respuesta.json();
+    try {
+        const respuesta = await fetch('/examen_escuela/API/asistencia/buscarSeccion');
+        const secciones = await respuesta.json();
+        console.log(secciones);
 
-//         secciones.forEach(seccion => {
-//             const option = document.createElement("option");
-//             option.value = seccion.seccion_id;
-//             option.textContent = seccion.seccion_nombre;
-//             seccionSelect.appendChild(option);
-//         });
-//     } catch (error) {
-//         console.error(error);
-//     }
-// });
+
+        secciones.forEach(seccion => {
+            const option = document.createElement("option");
+            option.value = seccion.seccion_id;
+            option.textContent = seccion.seccion_nombre;
+            seccionSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error al obtener datos:', error);
+    }
+});
 
 
 const buscar = async () => {
