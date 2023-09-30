@@ -29,14 +29,6 @@
                     </select>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="alumno_id">Alumno</label>
-                    <select name="alumno_id" id="alumno_id" class="form-control" required>
-                        <option value="">SELECCIONE...</option>
-                    </select>
-                </div>
-            </div>
             <div class="row ">
                 <div class="col">
                     <button type="submit" form="formularioAsistencia" id="btnGuardar" class="btn btn-primary btn-block">Guardar</button>
