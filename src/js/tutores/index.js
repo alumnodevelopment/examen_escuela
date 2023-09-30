@@ -17,7 +17,7 @@ btnCancelar.disabled = true;
 btnCancelar.parentElement.style.display = 'none';
 
 let contador = 1;
-const datatable = new Datatable('#tabaAsistencia', {
+const datatable = new Datatable('#tablaAsistencia', {
     language: lenguaje,
     data: null,
     columns: [
