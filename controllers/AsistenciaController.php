@@ -244,7 +244,7 @@ public static function buscarAlumnosAPI(){
 }
 
 
-public static function buscarGradosSecciones(){
+public static function buscarGradosSeccionesAPI(){
 
     $sql = "SELECT grados.grado_nombre, secciones.seccion_nombre, alumnos.alumno_nombre 
             FROM grados 

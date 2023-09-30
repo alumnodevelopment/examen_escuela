@@ -47,6 +47,8 @@ $router->get('/API/asistencia/buscar', [AsistenciaController::class,'buscarAPI']
 $router->get('/API/asistencia/buscarGrado', [AsistenciaController::class, 'buscarGradoAPI']);
 $router->get('/API/asistencia/buscarSeccion', [AsistenciaController::class, 'buscarSeccionAPI']);
 $router->get('/API/asistencia/buscarAlumnos', [AsistenciaController::class, 'buscarAlumnosAPI']);
+$router->get('/API/asistencia/buscarGradosSecciones', [AsistenciaController::class, 'buscarGradosSeccionesAPI']);
+
 
 
 
