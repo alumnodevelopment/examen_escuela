@@ -1,7 +1,7 @@
- <?php
+<?php
 
 namespace Controllers;
-
+ 
 use Exception;
 use Model\Grado;
 use MVC\Router;
