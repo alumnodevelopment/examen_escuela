@@ -276,6 +276,29 @@ const cancelarAccion = () => {
     btnCancelar.parentElement.style.display = 'none';
 };
 
+const buscarAlumnos = async () => {
+    const grado_id = formulario.grado_id.value;
+    const seccion_id = formulario.seccion_id.value;
+
+    const url = `/examen_escuela/API/asistencia/buscarAlumnos`;
+    try {
+        const respuesta = await fetch(url);
+        const data = await respuesta.json();
+        datatable.clear().draw();
+        if (data) {
+            contador = 1;
+            datatable.rows.add(data).draw();
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 formulario.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
