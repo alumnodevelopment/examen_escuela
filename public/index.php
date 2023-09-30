@@ -31,6 +31,14 @@ $router->post('/API/tutores/eliminar', [TutorController::class,'eliminarAPI'] );
 $router->get('/API/tutores/buscar', [TutorController::class,'buscarAPI'] );
 $router->get('/API/tutores/buscarAlumno', [TutorController::class, 'buscarAlumnoAPI']);
 
+//profesores
+$router->get('/profesores', [ProfesorController::class,'index']);
+$router->post('/API/profesores/guardar', [ProfesorController::class,'guardarAPI'] );
+$router->post('/API/profesores/modificar', [ProfesorController::class,'modificarAPI'] );
+$router->post('/API/profesores/eliminar', [ProfesorController::class,'eliminarAPI'] );
+$router->get('/API/profesores/buscar', [ProfesorController::class,'buscarAPI'] );
+
+
 $router->get('/grados/datatable', [GradoController::class,'datatable']);
 $router->post('/API/grados/guardar', [GradoController::class,'guardarAPI'] );
 $router->post('/API/grados/modificar', [GradoController::class,'modificarAPI'] );
