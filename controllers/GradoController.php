@@ -12,8 +12,8 @@ class SeccionController
     public static function datatable(Router $router){
         if(isset($_SESSION['auth_user'])){
         $router->render('grados/datatable', []);
-    }else{
-        header('Location: /examen_escuela/');
+    // }else{
+    //     header('Location: /examen_escuela/');
     }
     }
 

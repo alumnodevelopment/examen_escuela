@@ -12,7 +12,6 @@ module.exports = {
     'js/tutores/index' : './src/js/tutores/index.js',
     'js/profesores/index' : './src/js/profesores/index.js',
 
-
   },
   output: {
     filename: '[name].js',
