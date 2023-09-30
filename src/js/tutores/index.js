@@ -5,6 +5,8 @@ import Datatable from "datatables.net-bs5";
 import { lenguaje  } from "../lenguaje";
 
 
+
+
 const formulario = document.querySelector('form');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnBuscar = document.getElementById('btnBuscar');
@@ -58,7 +60,24 @@ const datatable = new Datatable('#tablaTutor', {
     ]
 });
 
+// Después de cargar la página, obtener los datos de los alumnos y llenar el select
+document.addEventListener("DOMContentLoaded", async () => {
+    const alumnoSelect = document.getElementById("alumno_id");
 
+    try {
+        const respuesta = await fetch('/examen_escuela/API/tutores/buscarAlumno');
+        const alumnos = await respuesta.json();
+
+        alumnos.forEach(alumno => {
+            const option = document.createElement("option");
+            option.value = alumno.alumno_id;
+            option.textContent = alumno.alumno_nombre;
+            alumnoSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 const buscar = async () => {
     const tutorNombre = formulario.tutor_nombre.value;
@@ -83,6 +102,26 @@ const buscar = async () => {
 
 const guardar = async (evento) => {
     evento.preventDefault();
+
+    // Obtener el valor seleccionado del campo de alumno_id
+    const alumnoSelect = document.getElementById("alumno_id");
+    const alumnoId = alumnoSelect.value;
+
+    // Obtener otros valores del formulario
+    const tutorNombre = document.getElementById("tutor_nombre").value;
+    const tutorTelefono = document.getElementById("tutor_telefono").value;
+    const tutorParentezco = document.getElementById("tutor_parentezco").value;
+
+    // Verificar si se ha seleccionado un alumno
+    // if (alumnoId === "") {
+    //     Toast.fire({
+    //         icon: 'info',
+    //         text: 'Por favor, seleccione un alumno'
+    //     });
+    //     return;
+    // }
+
+
     if (!validarFormulario(formulario)) {
         Toast.fire({
             icon: 'info',
@@ -90,6 +129,14 @@ const guardar = async (evento) => {
         });
         return;
     }
+
+    const formData = new FormData();
+    formData.append("tutor_nombre", tutorNombre);
+    formData.append("tutor_telefono", tutorTelefono);
+    formData.append("tutor_parentezco", tutorParentezco);
+    formData.append("alumno_id", alumnoId);
+
+    
     const body = new FormData(formulario);
     const url = '/examen_escuela/API/tutores/guardar';
     try {
@@ -202,6 +249,8 @@ const eliminar = async (e) => {
         }
     }
 };
+
+
 
 const colocarDatos = (dataset) => {
     formulario.tutor_nombre.value = dataset.nombre;

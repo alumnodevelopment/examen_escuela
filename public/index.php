@@ -26,6 +26,9 @@ $router->post('/API/tutores/guardar', [TutorController::class,'guardarAPI'] );
 $router->post('/API/tutores/modificar', [TutorController::class,'modificarAPI'] );
 $router->post('/API/tutores/eliminar', [TutorController::class,'eliminarAPI'] );
 $router->get('/API/tutores/buscar', [TutorController::class,'buscarAPI'] );
+$router->get('/API/tutores/buscarAlumno', [TutorController::class, 'buscarAlumnoAPI']);
+
+
 
 
 //profesores

@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Exception;
 use Model\Tutor;
+use Model\Alumno;
 use MVC\Router;
 
 
@@ -135,20 +136,36 @@ public static function buscarAPI(){
         ]);
     }
 }
-public static function buscarAlumno(){
-    $sql = "SELECT alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
+// public static function buscarAlumno(){
+//     $sql = "SELECT alumno_id, alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
+
+//     try {
+//         // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
+//         $alumnos = Alumno::fetchArray($sql);
+
+//         // Enviar la respuesta como un objeto JSON
+//         echo json_encode($alumnos);
+//     } catch (Exception $e) {
+//         // En caso de error, enviar un JSON con información del error
+//         // header('Content-Type: application/json');
+//         echo json_encode([
+//             'detalle' => $e->getMessage(),
+//             'mensaje' => 'Ocurrió un error',
+//             'codigo' => 0
+//         ]);
+//     }
+// }
+
+public static function buscarAlumnoAPI(){
+    $sql = "SELECT alumno_id, alumno_nombre FROM alumnos WHERE alumno_situacion = 1";
 
     try {
         // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
-        $alumnos = Tutor::fetchArray($sql);
-
-    
+        $alumnos = Alumno::fetchArray($sql);
 
         // Enviar la respuesta como un objeto JSON
         echo json_encode($alumnos);
     } catch (Exception $e) {
-        // En caso de error, enviar un JSON con información del error
-        // header('Content-Type: application/json');
         echo json_encode([
             'detalle' => $e->getMessage(),
             'mensaje' => 'Ocurrió un error',
@@ -156,6 +173,7 @@ public static function buscarAlumno(){
         ]);
     }
 }
+
 
 }
 
