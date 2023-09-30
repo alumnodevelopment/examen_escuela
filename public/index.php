@@ -40,6 +40,13 @@ $router->get('/API/profesores/buscar', [ProfesorController::class,'buscarAPI'] )
 
 //asistencia
 $router->get('/asistencia', [AsistenciaController::class,'index']);
+$router->post('/API/asistencia/guardar', [AsistenciaController::class,'guardarAPI'] );
+$router->post('/API/asistencia/modificar', [AsistenciaController::class,'modificarAPI'] );
+$router->post('/API/asistencia/eliminar', [AsistenciaController::class,'eliminarAPI'] );
+$router->get('/API/asistencia/buscar', [AsistenciaController::class,'buscarAPI'] );
+$router->get('/API/asistencia/buscarGrado', [AsistenciaController::class, 'buscarGradoAPI']);
+$router->get('/API/asistencia/buscarSeccion', [AsistenciaController::class, 'buscarSeccionAPI']);
+
 
 
 $router->get('/grados/datatable', [GradoController::class,'datatable']);

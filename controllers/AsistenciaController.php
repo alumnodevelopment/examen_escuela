@@ -7,6 +7,8 @@ use Model\Profesor;
 use Model\Tutor;
 use Model\Alumno;
 use Model\Asistencia;
+use Model\Grado;
+use Model\Seccion;
 use MVC\Router;
 
 
@@ -166,6 +168,52 @@ public static function buscarAPI() {
         ]);
     }
 }
+
+
+public static function buscarGrado(){
+    $sql = "SELECT grado_nombre FROM grados WHERE grado_situacion = 1";
+
+    try {
+        // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
+        $grados = Grado::fetchArray($sql);
+
+    
+
+        // Enviar la respuesta como un objeto JSON
+        echo json_encode($grados);
+    } catch (Exception $e) {
+        // En caso de error, enviar un JSON con información del error
+        // header('Content-Type: application/json');
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0
+        ]);
+    }
+}
+
+public static function buscarSeccion(){
+    $sql = "SELECT seccion_nombre FROM secciones WHERE seccion_situacion = 1";
+
+    try {
+        // Realizar la consulta SQL y obtener los resultados (asumiendo que ya tienes la conexión)
+        $seccion = Seccion::fetchArray($sql);
+
+    
+
+        // Enviar la respuesta como un objeto JSON
+        echo json_encode($seccion);
+    } catch (Exception $e) {
+        // En caso de error, enviar un JSON con información del error
+        // header('Content-Type: application/json');
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0
+        ]);
+    }
+}
+
 
 
 }
