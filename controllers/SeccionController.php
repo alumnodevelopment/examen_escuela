@@ -8,12 +8,8 @@ use MVC\Router;
 
 class SeccionController
 {
-    public static function datatable(Router $router){
-        if(isset($_SESSION['auth_user'])){
-        $router->render('secciones/datatable', []);
-    // }else{
-    //     header('Location: /examen_escuela/');
-    }
+    public static function index(Router $router){
+        $router->render('secciones/index', []);
     }
 
     public static function guardarAPI()

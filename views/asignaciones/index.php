@@ -74,4 +74,4 @@
         </table>
     </div>
 </div>
-<script src="<?= asset('./build/js/asignacion/index.js') ?>"></script>
+<script src="<?= asset('./build/js/asignaciones/index.js') ?>"></script>
