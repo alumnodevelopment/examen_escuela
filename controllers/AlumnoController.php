@@ -34,8 +34,8 @@ class AlumnoController{
         } else {
             echo json_encode([
                 'mensaje' => 'Ocurrió un error',
-                'codigo' => 0
-            ]);
+                    'codigo' => 0
+                ]);
         }
     } catch (Exception $e) {
         echo json_encode([

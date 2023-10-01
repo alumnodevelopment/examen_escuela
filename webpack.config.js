@@ -9,7 +9,7 @@ module.exports = {
     'js/alumnos/index' : './src/js/alumnos/index.js',
     'js/tutores/index' : './src/js/tutores/index.js',
     'js/profesores/index' : './src/js/profesores/index.js',
-
+    'js/pagos/index' : './src/js/pagos/index.js',
 
   },
   output: {
