@@ -9,6 +9,7 @@ use Controllers\AlumnoController;
 use Controllers\TutorController;
 use Controllers\ProfesorController;
 use Controllers\PagoController;
+use Controllers\ReportePagoController;
 
 
 $router = new Router();
@@ -44,6 +45,8 @@ $router->get('/API/pagos/buscar', [PagoController::class, 'buscarAPI']);
 $router->post('/API/pagos/guardar', [PagoController::class, 'guardarAPI']);
 $router->post('/API/pagos/modificar', [PagoController::class, 'modificarAPI']);
 $router->post('/API/pagos/eliminar', [PagoController::class, 'eliminarAPI']);
+$router->get('/API/reportePagos/generar', [ReportePagoController::class, 'pdf']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
+///examen_esc/API/reportePagos/generar
