@@ -9,10 +9,12 @@ use Controllers\ActividadController;
 use Controllers\AlumnoController;
 use Controllers\AsistenciaController;
 use Controllers\ProfesorController;
+use Controllers\PagoController;
 use Controllers\SeccionController;
 use Controllers\TutorController;
 use Controllers\AsignacionController;
 use Controllers\ReporteConductaController;
+
 
 
 $router = new Router();
@@ -49,6 +51,13 @@ $router->post('/API/profesores/modificar', [ProfesorController::class,'modificar
 $router->post('/API/profesores/eliminar', [ProfesorController::class,'eliminarAPI'] );
 $router->get('/API/profesores/buscar', [ProfesorController::class,'buscarAPI'] );
 
+
+
+$router->get('/pagos', [PagoController::class, 'index']);
+$router->get('/API/pagos/buscar', [PagoController::class, 'buscarAPI']);
+$router->post('/API/pagos/guardar', [PagoController::class, 'guardarAPI']);
+$router->post('/API/pagos/modificar', [PagoController::class, 'modificarAPI']);
+$router->post('/API/pagos/eliminar', [PagoController::class, 'eliminarAPI']);
 
 $router->get('/grados', [GradoController::class,'index']);
 

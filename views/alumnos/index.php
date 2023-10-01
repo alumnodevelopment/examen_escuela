@@ -43,7 +43,7 @@
                 </div>
             </form>
         </div>
-        <h1>Datatable de Alumnos</h1>
+        <h1>Historial de Alumnos</h1>
         <div class="row justify-content-center">
             <div class="col table-responsive">
                 <table id="tablaAlumnos" class="table table-bordered table-hover">
