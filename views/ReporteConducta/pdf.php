@@ -66,19 +66,17 @@
 <table class="styled-table">
     <thead>
         <tr>
-            <th>Fecha</th>
-            <th>Cantidad</th>
-            <th>Producto</th>
-            <th>Cliente</th>
+            <th>ALUMNO</th>
+            <th>FECHA</th>
+            <th>DESCRIPCION</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($ventas as $venta) : ?>
+        <?php foreach ($conductas as $conducta) : ?>
             <tr>
-                <td><?= $venta->fecha ?></td>
-                <td><?= $venta->cantidad ?></td>
-                <td><?= $venta->producto ?></td>
-                <td><?= $venta->cliente ?></td>
+                <td><?= $conducta->alumno_nombre ?></td>
+                <td><?= $conducta->conducta_fecha ?></td>
+                <td><?= $conducta->conducta_descripcion ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
