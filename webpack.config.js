@@ -11,8 +11,13 @@ module.exports = {
     'js/alumnos/index' : './src/js/alumnos/index.js',
     'js/tutores/index' : './src/js/tutores/index.js',
     'js/profesores/index' : './src/js/profesores/index.js',
+    'js/conductas/index' : './src/js/conductas/index.js',
+    'js/pdfconductas/index' : './src/js/pdfconductas/index.js',
+    'js/asistencia/index' : './src/js/asistencia/index.js',
     'js/asignaciones/index' : './src/js/asignaciones/index.js',
     'js/actividades/index' : './src/js/actividades/index.js',
+
+
 
   },
   output: {
