@@ -24,182 +24,87 @@ const datatable = new Datatable('#tablaAsistencia', {
         {
             title: 'NO',
             render: () => contador++
-        },
+        }, 
         {
-            title: 'GRADO',
-            data: 'grado_id'
-        },
-     
-        {
-            title: 'GRADO NOMBRE',
-            data: 'grado_nombre'
-        },   
-        {
-            title: 'Seccion',
-            data: 'seccion_id'
-        },
-        {
-            title: 'Seccion Nombre',
-            data: 'seccion_nombre'
-        },   
-        {
-            title: 'Alumno Nombre',
+            title: 'Nombre del Alumno',
             data: 'alumno_id'
+        },   
+        {
+            title: 'Fecha de la asistencia',
+            data: 'asistencia_fecha'
+            
         },
         {
-            title: 'Alumno',
-            data: 'alumno_nombre'
+            title: 'Asistencia',
+            data: 'asistencia_asistio'
 
         }, 
-     
-       {
-           title: 'FECHA',
-           data: 'asistencia_fecha'
-       },
-       {
-        title: 'ASISTENCIA PRESENTE',
-        data: 'asistencia_asistio',
-        render: function(data, type, row) {
-            if (type === 'display') {
-                // Renderizar un select en la vista
-                return '<select class="form-control" onchange="updateAsistencia(this.value, ' + row.id + ')">' +
-                    '<option value="1"' + (data === '1' ? ' selected' : '') + '>Presente</option>' +
-                    '<option value="0"' + (data === '0' ? ' selected' : '') + '>Ausente</option>' +
-                    '</select>';
-            }
-            return data;
-        }
-    },
         {
             title: 'MODIFICAR',
             data: 'asistencia_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-grado='${row["grado_id"]}' data-seccion='${row["seccion_id"]}' data-alumno='${row["alumno_id"]}' data-fecha='${row["asistencia_fecha"]}'>Modificar</button>`
-        },
-
-        {
-            title: 'MODIFICAR',
-            data: 'asistencia_id',
-            searchable: false,
-            orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-grado='${row["grado_id"]}' data-seccion='${row["seccion_id"]}' data-alumno='${row["alumno_id"]}' data-fecha='${row["asistencia_fecha"]}'>Modificar</button>`
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["alumno_id"]}'
+            data-fecha='${row["asistencia_fecha"]}' data-asistio='${row["asistencia_asistio"]}'>Modificar</button>`
         },
         {
             title: 'ELIMINAR',
             data: 'asistencia_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
-        }
+            render: (data, type, row, meta) => `<button class="btn btn-danger" data-id='${data}' >Eliminar</button>`
+        },
     ]
 });
 
+
 // Después de cargar la página, obtener los datos de los alumnos y llenar el select
 document.addEventListener("DOMContentLoaded", async () => {
-    const gradoSelect = document.getElementById("grado_id");
+    const alumnoSelect = document.getElementById("alumno_id");
 
     try {
-        const respuesta = await fetch('/examen_escuela/API/asistencia/buscarGrado');
-        const grados = await respuesta.json();
-        console.log(grados);
-        // return;
-        grados.forEach(grado => {
+        const respuesta = await fetch('/examen_escuela/API/asistencia/buscarAlumno');
+        const alumnos = await respuesta.json();
+
+        alumnos.forEach(alumno => {
             const option = document.createElement("option");
-            option.value = grado.grado_id;
-            option.textContent = grado.grado_nombre;
-            gradoSelect.appendChild(option);
+            option.value = alumno.alumno_id;
+            option.textContent = alumno.alumno_nombre;
+            alumnoSelect.appendChild(option);
         });
-    } catch (error) {
-        console.error('Error al obtener datos:', error);
-    }
-});
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const seccionSelect = document.getElementById("seccion_id");
-
-    try {
-        const respuesta = await fetch('/examen_escuela/API/asistencia/buscarSeccion');
-        const secciones = await respuesta.json();
-        console.log(secciones);
-
-
-        secciones.forEach(seccion => {
-            const option = document.createElement("option");
-            option.value = seccion.seccion_id;
-            option.textContent = seccion.seccion_nombre;
-            seccionSelect.appendChild(option);
-        });
-    } catch (error) {
-        console.error('Error al obtener datos:', error);
-    }
-});
-
-const buscarGradosSecciones = async () => {
-    console.log("Evento de búsqueda activado");
-    const grado_id = formulario.grado_id.value;
-    const seccion_id = formulario.seccion_id.value;
-
-    console.log("Grado ID:", grado_id); // Verificar el valor de grado_id
-    console.log("Sección ID:", seccion_id);
-
-
-    const url = `/examen_escuela/API/asistencia/buscarGradosSecciones?grado_id=${grado_id}&seccion_id=${seccion_id}`;
-    try {
-        const respuesta = await fetch(url);
-        const data = await respuesta.json();
-
-        console.log("Datos recibidos del servidor:", data);
-
-        // const datosFiltrados = data.filter(item => {
-        //     return item.grado_nombre === grado_id && item.seccion_nombre === seccion_id;
-        // });
-        datatable.clear().draw();
-        if (data) {
-            contador = 1;
-            datatable.rows.add(data).draw();
-        } else {
-            Toast.fire({
-                title: 'No se encontraron registros',
-                icon: 'info'
-            });
-        }
     } catch (error) {
         console.error(error);
     }
-};
-const buscar = async () => {
-    const grado_id = formulario.grado_id.value;
-    const seccion_id = formulario.seccion_id.value;
+});
 
-    const url = `/examen_escuela/API/asistencia/buscar?grado_id=${grado_id}&seccion_id=${seccion_id}`;
-    try {
-        const respuesta = await fetch(url);
-        const data = await respuesta.json();
-        datatable.clear().draw();
-        if (data) {
-            contador = 1;
-            datatable.rows.add(data).draw();
-        } else {
-            Toast.fire({
-                title: 'No se encontraron registros',
-                icon: 'info'
-            });
-        }
-    } catch (error) {
-        console.error(error);
-    }
-};
+
+
 
 const guardar = async (evento) => {
     evento.preventDefault();
-    if (!validarFormulario(formulario)) {
+
+    // Obtener el valor seleccionado del campo de alumno_id
+    const alumnoSelect = document.getElementById("alumno_id");
+    const alumnoId = alumnoSelect.value;
+
+    // Obtener otros valores del formulario
+    const asistencia_fecha = document.getElementById("asistencia_fecha").value;
+    const asistencia_asistio = document.getElementById("asistencia_asistio").value;
+
+
+    if (alumnoSelect.value === "" || asistencia_fecha === "" || asistencia_asistio === "") {
         Toast.fire({
             icon: 'info',
-            text: 'Debe llenar todos los datos'
+            text: 'Por favor, llene todos los campos'
         });
         return;
     }
+    const formData = new FormData();
+    formData.append("asistencia_fecha", asistencia_fecha);
+    formData.append("asistencia_asistio", asistencia_asistio);
+    formData.append("alumno_id", alumnoId);
+
+    
     const body = new FormData(formulario);
     const url = '/examen_escuela/API/asistencia/guardar';
     try {
@@ -225,6 +130,33 @@ const guardar = async (evento) => {
         console.error(error);
     }
 };
+
+
+
+const buscar = async () => {
+    const alumno_id = formulario.alumno_id.value;
+    const asistencia_fecha = formulario.asistencia_fecha.value;
+
+    const url = `/examen_escuela/API/asistencia/buscar?alumno_id=${alumno_id}&asistencia_fecha=${asistencia_fecha}`;
+    try {
+        const respuesta = await fetch(url);
+        const data = await respuesta.json();
+        datatable.clear().draw();
+        if (data) {
+            contador = 1;
+            datatable.rows.add(data).draw();
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 
 
 const modificar = async (evento) => {
@@ -268,7 +200,7 @@ const eliminar = async (e) => {
     const id = button.dataset.id;
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('tutor_id', id);
+        body.append('asistencia_id', id);
         const url = '/examen_escuela/API/asistencia/eliminar';
         try {
             const respuesta = await fetch(url, {
@@ -297,34 +229,28 @@ const eliminar = async (e) => {
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
-    const grado_id = button.dataset.grado_id;
-    const grado_nombre = button.dataset.grado_nombre;
-    const seccion_id = button.dataset.seccion_id;
-    const seccion_nombre = button.dataset.seccion_nombre;
     const alumno_id = button.dataset.alumno_id;
-    const alumno_nombre = button.dataset.alumno_nombre;
     const asistencia_fecha = button.dataset.asistencia_fecha;
+    const asistencia_asistio = button.dataset.asistencia_asistio;
+
 
     const dataset = {
         id,
-        grado_id,
-        grado_nombre,
-        seccion_id,
-        seccion_nombre,
         alumno_id,
-        alumno_nombre,
-        asistencia_fecha
+        asistencia_fecha,
+        asistencia_asistio
     };
+  
     colocarDatos(dataset);
 };
+
+
+
+
 const colocarDatos = (dataset) => {
-    formulario.grado_id.value = dataset.grado;
-    formulario.grado_nombre.value = dataset.grado_nombre;
-    formulario.seccion_id.value = dataset.seccion_id;
-    formulario.seccion_nombre.value = dataset.seccion_nombre;
     formulario.alumno_id.value = dataset.alumno_id;
-    formulario.alumno_nombre.value = dataset.alumno_nombre;
     formulario.asistencia_fecha.value = dataset.asistencia_fecha;
+    formulario.asistencia_asistio.value = dataset.asistencia_asistio;
     formulario.asistencia_id.value = dataset.id;
 
     btnGuardar.disabled = true;
@@ -337,6 +263,7 @@ const colocarDatos = (dataset) => {
     btnCancelar.parentElement.style.display = '';
 };
 
+
 const cancelarAccion = () => {
     formulario.reset();
     btnGuardar.disabled = false;
@@ -348,6 +275,7 @@ const cancelarAccion = () => {
     btnCancelar.disabled = true;
     btnCancelar.parentElement.style.display = 'none';
 };
+
 
 // const buscarAlumnos = async () => {
   
@@ -374,7 +302,8 @@ const cancelarAccion = () => {
 
 //buscarAlumnos();
 formulario.addEventListener('submit', guardar);
-btnBuscar.addEventListener('click', buscarGradosSecciones);
+btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
+btnModificar.addEventListener('click', modificar);
 datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);
