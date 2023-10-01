@@ -12,7 +12,7 @@ module.exports = {
     'js/tutores/index' : './src/js/tutores/index.js',
     'js/profesores/index' : './src/js/profesores/index.js',
     'js/asistencia/index' : './src/js/asistencia/index.js',
-
+    'js/asignaciones/index' : './src/js/asignaciones/index.js',
 
 
   },
