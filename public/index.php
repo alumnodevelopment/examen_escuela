@@ -78,6 +78,8 @@ $router->get('/API/conductas/buscar', [ConductaController::class,'buscarAPI'] );
 
 $router->get('/pdfconductas', [ReporteConductaController::class,'index']);
 $router->get('/API/pdfconductas/buscar', [ReporteConductaController::class,'buscarAPI'] );
+$router->post('/ReporteConducta/generarPDF', [ReporteConductaController::class, 'generarPDF']);
+
 
 $router->get('/secciones', [SeccionController::class,'index'] );
 $router->post('/API/secciones/guardar', [SeccionController::class,'guardarAPI'] );

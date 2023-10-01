@@ -9,14 +9,9 @@ const btnBuscar = document.getElementById('btnBuscar');
 const divTabla = document.getElementById('tablaConducta'); 
 
 
-
-    btnBuscar.disabled = true;
-    btnBuscar.parentElement.style.display = 'none';
-
-
 let contador = 1;
 const datatable = new Datatable('#tablaConducta', {
-    language: lenguaje,
+
     data: null,
     columns: [
         {
@@ -41,35 +36,29 @@ const datatable = new Datatable('#tablaConducta', {
 const buscar = async () => {
     let alumno_id = formulario.alumno_id.value; 
     let conducta_fecha = formulario.conducta_fecha.value; 
-    console.log('test: "' + alumno_id + '"'+ conducta_fecha );
 
     const url = `/examen_escuela/API/pdfconductas/buscar?alumno_id=${alumno_id}&conducta_fecha=${conducta_fecha}`; 
-    const config = {
-        method: 'GET'
-    };
 
     try {
-        const respuesta = await fetch(url, config);
+        const respuesta = await fetch(url);
         const data = await respuesta.json();
-        console.log(data);
 
         datatable.clear().draw();
-        if (data) {
+        if (data && data.length > 0) {
             contador = 1;
             datatable.rows.add(data).draw();
+            generarPDF(data);
+            formulario.reset();
         } else {
             Toast.fire({
                 title: 'No se encontraron registros',
                 icon: 'info'
             });
         }
-
     } catch (error) {
-        console.log(error);
+        console.error('Error al obtener datos:', error);
     }
 };
-
-
 
 const traeDatos = (e) => {
     const button = e.target;
@@ -77,7 +66,6 @@ const traeDatos = (e) => {
     const alumno = button.dataset.alumno;
     const fecha = button.dataset.fecha;
     const descripcion = button.dataset.descripcion;
-
 
     const dataset = {
         id,
@@ -87,11 +75,6 @@ const traeDatos = (e) => {
     };
 
     colocarDatos(dataset);
-    const body = new FormData(formulario);
-    body.append('conducta_id', id);
-    body.append('alumno_nombre', alumno);
-    body.append('conducta_fecha', fecha);
-    body.append('conducta_descripcion', descripcion);
 };
 
 const colocarDatos = (dataset) => {
@@ -99,15 +82,39 @@ const colocarDatos = (dataset) => {
     formulario.conducta_fecha.value = dataset.fecha;
     formulario.conducta_descripcion.value = dataset.descripcion;
     formulario.conducta_id.value = dataset.id;
-
-    btnBuscar.disabled = true;
-    btnBuscar.parentElement.style.display = 'none';
-
 };
 
+const generarPDF = async (datos) => {
+    const url = `/examen_escuela/ReporteConducta/generarPDF`;
+
+    try {
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+        });
+
+        if (respuesta.ok) {
+            const blob = await respuesta.blob();
+
+            if (blob) {
+                const urlBlob = window.URL.createObjectURL(blob);
+                // Abre el PDF en una nueva ventana o pestaña
+                window.open(urlBlob, '_blank');
+            } else {
+                console.error('No se pudo obtener el blob del PDF.');
+            }
+        } else {
+            console.error('Error al generar el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al generar el PDF:', error);
+    }
+};
 
 if (formulario) {
-    buscar();
     btnBuscar.addEventListener('click', buscar);
     datatable.on('click', '.btn-warning', traeDatos);
 }
