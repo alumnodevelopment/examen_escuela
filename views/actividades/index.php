@@ -1,5 +1,5 @@
 <div class="row justify-content-center mb-5">
-    <form class="col-lg-8 border bg-light p-3" id="formularioActividades">
+    <form class="col-lg-8 border bg-light p-3" id="formularioActividad">
         <input type="hidden" name="actividad_id" id="actividad_id">
         <div class="row mb-3">
             <div class="col">
@@ -39,7 +39,7 @@
                 </select>
             </div>
         </div>
-        
+
         <div class="row mb-3">
             <div class="col">
                 <label for="actividad_fecha_inicio">FECHA Y HORA DE INICIO</label>
@@ -57,7 +57,7 @@
         <div class="row mb-3">
             <div class="col">
                 <label for="actividad_descripcion">DESCRIPCIÓN DE LA ACTIVIDAD</label>
-                <textarea name="actividad_descripcion" id="actividad_descripcion" class="form-control"></textarea>
+                <input type="text" name="actividad_descripcion" id="actividad_descripcion" class="form-control">
             </div>
         </div>
 

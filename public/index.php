@@ -7,6 +7,7 @@ use Controllers\AppController;
 use Controllers\GradoController;
 use Controllers\SeccionController;
 use Controllers\AsignacionController;
+use Controllers\ActividadController;
 use Controllers\AlumnoController;
 use Controllers\TutorController;
 
@@ -39,7 +40,7 @@ $router->post('/API/profesores/modificar', [ProfesorController::class,'modificar
 $router->post('/API/profesores/eliminar', [ProfesorController::class,'eliminarAPI'] );
 $router->get('/API/profesores/buscar', [ProfesorController::class,'buscarAPI'] );
 
-$router->get('/grados/datatable', [GradoController::class,'datatable']);
+$router->get('/grados', [GradoController::class,'index']);
 $router->post('/API/grados/guardar', [GradoController::class,'guardarAPI'] );
 $router->post('/API/grados/modificar', [GradoController::class,'modificarAPI'] );
 $router->post('/API/grados/eliminar', [GradoController::class,'eliminarAPI'] );
@@ -56,6 +57,12 @@ $router->post('/API/asignaciones/guardar', [AsignacionController::class,'guardar
 $router->post('/API/asignaciones/modificar', [AsignacionController::class,'modificarAPI'] );
 $router->post('/API/asignaciones/eliminar', [AsignacionController::class,'eliminarAPI'] );
 $router->get('/API/asignaciones/buscar', [AsignacionController::class,'buscarAPI'] );
+
+$router->get('/actividades', [ActividadController::class,'index'] );
+$router->post('/API/actividades/guardar', [ActividadController::class,'guardarAPI'] );
+$router->post('/API/actividades/modificar', [ActividadController::class,'modificarAPI'] );
+$router->post('/API/actividades/eliminar', [ActividadController::class,'eliminarAPI'] );
+$router->get('/API/actividades/buscar', [ActividadController::class,'buscarAPI'] );
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

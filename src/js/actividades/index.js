@@ -28,27 +28,27 @@ const datatable = new Datatable('#tablaActividades', {
         },
         {
             title : 'PROFESOR',
-            data: 'actividad_profesor',
+            data: 'profesor_nombre',
         },
 
         {
             title : 'GRADO',
-            data: 'actividad_grado',
+            data: 'grado_nombre',
         },
         {
             title : 'SECCION',
-            data: 'actividad_seccion',
+            data: 'seccion_nombre',
         },
         {
             title : 'FECHA_INICIO',
-            data: 'actividad_fecha_incio',
+            data: 'actividad_fecha_inicio',
         },
         {
             title : 'FECHA_FIN',
             data: 'actividad_fecha_fin',
         },
         {
-            title : 'DESCRIPCION_ACTIVIDAD',
+            title : 'ACTIVIDAD_DESCRIPCION',
             data: 'actividad_descripcion',
         },
 
@@ -57,7 +57,7 @@ const datatable = new Datatable('#tablaActividades', {
             data: 'actividad_id',
             searchable : false,
             orderable : false,
-            render : (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-profesor='${row["actividad_profesor"]}' data-grado='${row["actividad_grado"]}'  data-seccion='${row["actividad_seccion"]}' data-fecha_inicio='${row["actividad_fecha_inicio"]}' data-fecha_fin='${row["actividad_fecha_fin"]}' data-descripcion_actividad='${row["actividad_descripcion"]}'  >Modificar</button>`
+            render : (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-profesor='${row["actividad_profesor"]}' data-grado='${row["actividad_grado"]}'  data-seccion='${row["actividad_seccion"]}' data-fecha_inicio='${row["actividad_fecha_inicio"]}' data-fecha_fin='${row["actividad_fecha_fin"]}' data-actividad_descripcion='${row["actividad_descripcion"]}'  >Modificar</button>`
         },
         {
             title : 'ELIMINAR',
@@ -165,7 +165,7 @@ const traeDatos = (e) => {
     const seccion = button.dataset.seccion;
     const fecha_inicio = button.dataset.fecha_inicio;
     const fecha_fin = button.dataset.fecha_fin;
-    const descripcion_actividad = button.dataset.descripcion_actividad;
+    const actividad_descripcion = button.dataset.actividad_descripcion;
     
     
     const dataset = {
@@ -175,7 +175,7 @@ const traeDatos = (e) => {
         seccion,
         fecha_inicio,
         fecha_fin,
-        descripcion_actividad
+        actividad_descripcion
        
     };
     colocarDatos(dataset);
@@ -186,7 +186,7 @@ const traeDatos = (e) => {
         body.append('actividad_profesor', profesor);  
         body.append('actividad_fecha_inicio', fecha_inicio);
         body.append('actividad_fecha_fin', fecha_fin);
-        body.append('actividad_descripcion', descripcion_actividad);
+        body.append('actividad_descripcion', actividad_descripcion);
 };
 
 const modificar = async () => {
@@ -196,7 +196,7 @@ const modificar = async () => {
     }
 
     const body = new FormData(formulario)
-    const url = '/examen_escuela/API/actvidades/modificar';
+    const url = '/examen_escuela/API/actividades/modificar';
     const config = {
         method : 'POST',
         body
@@ -286,7 +286,7 @@ const colocarDatos = (dataset) => {
     formulario.actividad_profesor.value = dataset.profesor;
     formulario.actividad_fecha_inicio.value = dataset.fecha_inicio;
     formulario.actividad_fecha_fin.value = dataset.fecha_fin;
-    formulario.actividad_descripcion.value = dataset.descripcion_actividad;
+    formulario.actividad_descripcion.value = dataset.actividad_descripcion;
     formulario.actividad_id.value = dataset.id;
 
     btnGuardar.disabled = true
