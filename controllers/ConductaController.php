@@ -56,7 +56,10 @@ class ConductaController {
         $conducta_fecha = $_GET['conducta_fecha'] ?? '';
 
 
-        $sql = "SELECT * FROM conducta c inner join alumnos a on a.alumno_id = c.alumno_id WHERE c.conducta_situacion = 1 ";
+        $sql = "SELECT c.conducta_id, a.alumno_nombre, c.conducta_fecha, c.conducta_descripcion
+        FROM conducta c
+        INNER JOIN alumnos a ON a.alumno_id = c.alumno_id
+        WHERE c.conducta_situacion = 1;";
 
         if ($alumno_id != '') {
             $sql .= " AND a.alumno_id LIKE '%${alumno_id}%'";

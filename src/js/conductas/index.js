@@ -31,7 +31,7 @@ const datatable = new Datatable('#tablaConducta', {
         },
         {
             title: 'ALUMNO', 
-            data: 'alumno_id' 
+            data: 'alumno_nombre' 
         },
         {
             title: 'FECHA', 
@@ -217,7 +217,7 @@ const traeDatos = (e) => {
     colocarDatos(dataset);
     const body = new FormData(formulario);
     body.append('conducta_id', id);
-    body.append('alumno_id', alumno);
+    body.append('alumno_nombre', alumno);
     body.append('conducta_fecha', fecha);
     body.append('conducta_descripcion', descripcion);
 };
