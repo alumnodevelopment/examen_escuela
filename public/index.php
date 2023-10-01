@@ -32,8 +32,6 @@ $router->get('/API/tutores/buscar', [TutorController::class,'buscarAPI'] );
 $router->get('/API/tutores/buscarAlumno', [TutorController::class, 'buscarAlumnoAPI']);
 
 
-
-
 //profesores
 $router->get('/profesores', [ProfesorController::class,'index']);
 $router->post('/API/profesores/guardar', [ProfesorController::class,'guardarAPI'] );
