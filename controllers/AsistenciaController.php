@@ -245,6 +245,14 @@ public static function buscarAlumnosAPI(){
 
 
 public static function buscarGradosSeccionesAPI(){
+    
+
+    try {
+        $grado_id = $_GET['grado_id'] ?? '';
+        $seccion_id = $_GET['seccion_id'] ?? '';
+        
+        // Verificar si se proporcionaron tanto el grado como la sección
+        if ($grado_id !== '' && $seccion_id !== '') {
 
     $sql = "SELECT grados.grado_nombre, secciones.seccion_nombre, alumnos.alumno_nombre 
             FROM grados 
@@ -253,11 +261,18 @@ public static function buscarGradosSeccionesAPI(){
             INNER JOIN alumnos ON asignacion_grados.alumno_id = alumnos.alumno_id 
             WHERE grados.grado_situacion = 1 AND secciones.seccion_situacion = 1 AND alumnos.alumno_situacion = 1";
 
-try {
+
       
     $resultado = Grado::fetchArray($sql);
 
     echo json_encode($resultado);
+    } else {
+    // Si no se proporcionaron tanto grado como sección, retornar un mensaje de error
+    echo json_encode([
+        'mensaje' => 'Por favor, proporciona tanto el grado como la sección para buscar registros de asistencia.',
+        'codigo' => 0
+    ]);
+    }
     } catch (Exception $e) {
         // En caso de error, enviar un JSON con información del error
         header('Content-Type: application/json');
