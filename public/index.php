@@ -12,6 +12,7 @@ use Controllers\ProfesorController;
 use Controllers\SeccionController;
 use Controllers\TutorController;
 use Controllers\AsignacionController;
+use Controllers\ReporteConductaController;
 
 
 $router = new Router();
@@ -72,6 +73,11 @@ $router->post('/API/conductas/guardar', [ConductaController::class,'guardarAPI']
 $router->post('/API/conductas/modificar', [ConductaController::class,'modificarAPI'] );
 $router->post('/API/conductas/eliminar', [ConductaController::class,'eliminarAPI'] );
 $router->get('/API/conductas/buscar', [ConductaController::class,'buscarAPI'] );
+
+//pdf reporte conducta
+
+$router->get('/pdfconductas', [ReporteConductaController::class,'index']);
+$router->get('/API/pdfconductas/buscar', [ReporteConductaController::class,'buscarAPI'] );
 
 $router->get('/secciones', [SeccionController::class,'index'] );
 $router->post('/API/secciones/guardar', [SeccionController::class,'guardarAPI'] );

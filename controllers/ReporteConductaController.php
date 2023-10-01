@@ -3,16 +3,29 @@ namespace Controllers;
 
 use Mpdf\Mpdf;
 use MVC\Router;
-
+use Model\Conducta;
 use Exception;
 
-class ReporteConductaController {
+class ReporteConductaController{ 
+public static function index(Router $router) {
+
+    $alumnos = static::BuscarAlumnos();
+    
+    // $conductas = Conducta::all();
+
+    $router->render('pdfconductas/index', [
+
+        'alumnos' => $alumnos,
+    ]);
+}
+
+
     public static function pdf(Router $router){
-        $venta_fecha_inicio = $_GET['venta_fecha_inicio'];
+        $alumno_id = $_GET['alumno_id'];
         $venta_fecha_fin = $_GET['venta_fecha_fin'];
 
         // Obtener los datos de ventas utilizando la funcion buscar
-        $ventas = ConductaController::buscarAPI($venta_fecha_inicio, $venta_fecha_fin);
+        $ventas = ConductaController::buscarAPI($alumno_id);
 
         // Crear un objeto mPDF
         $mpdf = new Mpdf([
@@ -81,6 +94,51 @@ class ReporteConductaController {
 
     // Generar el PDF y mostrarlo o descargarlo
     $mpdf->Output();
+}
+public static function buscarAPI() {
+
+    $alumno_id = $_GET['alumno_id'] ?? '';
+    $conducta_fecha = $_GET['conducta_fecha'] ?? '';
+
+
+    $sql = "SELECT c.conducta_id, a.alumno_nombre, c.conducta_fecha, c.conducta_descripcion
+    FROM conducta c
+    INNER JOIN alumnos a ON a.alumno_id = c.alumno_id
+    WHERE c.conducta_situacion = 1;";
+
+    if ($alumno_id != '') {
+        $sql .= " AND a.alumno_id LIKE '%${alumno_id}%'";
+    }
+
+    if ($conducta_fecha != '') {
+        $sql .= " AND c.conducta_fecha LIKE '%${conducta_fecha}%'";
+    }
+   
+
+    try {
+        $conductas = Conducta::fetchArray($sql);
+        echo json_encode($conductas);
+    } catch (Exception $e) {
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0,
+        ]);
+    }
+}
+
+
+public static function BuscarAlumnos(){
+
+    $sql = "SELECT * FROM alumnos WHERE alumno_situacion = 1";
+
+    try {
+        $alumnos = Conducta::fetchArray($sql);
+        return $alumnos;
+    } catch (Exception $e) {
+
+    }
+    
 }
 
  }
