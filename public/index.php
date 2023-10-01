@@ -5,7 +5,7 @@ require_once __DIR__ . '/../includes/app.php';
 use MVC\Router;
 use Controllers\AppController;
 use Controllers\GradoController;
-use Controllers\ConductaController;
+use Controllers\ActividadController;
 use Controllers\AlumnoController;
 use Controllers\AsistenciaController;
 use Controllers\ProfesorController;
@@ -50,6 +50,8 @@ $router->post('/API/profesores/eliminar', [ProfesorController::class,'eliminarAP
 $router->get('/API/profesores/buscar', [ProfesorController::class,'buscarAPI'] );
 
 
+$router->get('/grados', [GradoController::class,'index']);
+
 //asistencia
 $router->get('/asistencia', [AsistenciaController::class,'index']);
 $router->post('/API/asistencia/guardar', [AsistenciaController::class,'guardarAPI'] );
@@ -63,6 +65,7 @@ $router->get('/API/asistencia/buscarGradosSecciones', [AsistenciaController::cla
 
 
 $router->get('/grados/datatable', [GradoController::class,'datatable']);
+
 $router->post('/API/grados/guardar', [GradoController::class,'guardarAPI'] );
 $router->post('/API/grados/modificar', [GradoController::class,'modificarAPI'] );
 $router->post('/API/grados/eliminar', [GradoController::class,'eliminarAPI'] );
@@ -92,6 +95,12 @@ $router->post('/API/asignaciones/guardar', [AsignacionController::class,'guardar
 $router->post('/API/asignaciones/modificar', [AsignacionController::class,'modificarAPI'] );
 $router->post('/API/asignaciones/eliminar', [AsignacionController::class,'eliminarAPI'] );
 $router->get('/API/asignaciones/buscar', [AsignacionController::class,'buscarAPI'] );
+
+$router->get('/actividades', [ActividadController::class,'index'] );
+$router->post('/API/actividades/guardar', [ActividadController::class,'guardarAPI'] );
+$router->post('/API/actividades/modificar', [ActividadController::class,'modificarAPI'] );
+$router->post('/API/actividades/eliminar', [ActividadController::class,'eliminarAPI'] );
+$router->get('/API/actividades/buscar', [ActividadController::class,'buscarAPI'] );
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
