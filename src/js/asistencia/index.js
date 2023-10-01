@@ -25,35 +25,59 @@ const datatable = new Datatable('#tablaAsistencia', {
             title: 'NO',
             render: () => contador++
         },
-        // {
-        //     title: 'GRADO',
-        //     data: 'grado_id'
-        // },
-        // {
-        //     title: 'Seccion',
-        //     data: 'seccion_id'
-        // },
+        {
+            title: 'GRADO',
+            data: 'grado_id'
+        },
+     
         {
             title: 'GRADO NOMBRE',
             data: 'grado_nombre'
+        },   
+        {
+            title: 'Seccion',
+            data: 'seccion_id'
         },
         {
             title: 'Seccion Nombre',
             data: 'seccion_nombre'
+        },   
+        {
+            title: 'Alumno Nombre',
+            data: 'alumno_id'
         },
         {
             title: 'Alumno',
             data: 'alumno_nombre'
 
         }, 
-        // {
-        //     title: 'Alumno Nombre',
-        //     data: 'alumno_id'
-        // },
-      //  {
-           // title: 'FECHA',
-           // data: 'asistencia_fecha'
-       // },
+     
+       {
+           title: 'FECHA',
+           data: 'asistencia_fecha'
+       },
+       {
+        title: 'ASISTENCIA PRESENTE',
+        data: 'asistencia_asistio',
+        render: function(data, type, row) {
+            if (type === 'display') {
+                // Renderizar un select en la vista
+                return '<select class="form-control" onchange="updateAsistencia(this.value, ' + row.id + ')">' +
+                    '<option value="1"' + (data === '1' ? ' selected' : '') + '>Presente</option>' +
+                    '<option value="0"' + (data === '0' ? ' selected' : '') + '>Ausente</option>' +
+                    '</select>';
+            }
+            return data;
+        }
+    },
+        {
+            title: 'MODIFICAR',
+            data: 'asistencia_id',
+            searchable: false,
+            orderable: false,
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-grado='${row["grado_id"]}' data-seccion='${row["seccion_id"]}' data-alumno='${row["alumno_id"]}' data-fecha='${row["asistencia_fecha"]}'>Modificar</button>`
+        },
+
         {
             title: 'MODIFICAR',
             data: 'asistencia_id',
@@ -273,32 +297,34 @@ const eliminar = async (e) => {
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
+    const grado_id = button.dataset.grado_id;
     const grado_nombre = button.dataset.grado_nombre;
+    const seccion_id = button.dataset.seccion_id;
     const seccion_nombre = button.dataset.seccion_nombre;
-    //const alumno = button.dataset.alumno;
+    const alumno_id = button.dataset.alumno_id;
     const alumno_nombre = button.dataset.alumno_nombre;
-    const fecha = button.dataset.fecha;
+    const asistencia_fecha = button.dataset.asistencia_fecha;
 
     const dataset = {
         id,
-        //grado,
-        //seccion,
+        grado_id,
         grado_nombre,
+        seccion_id,
         seccion_nombre,
-        //alumno,
+        alumno_id,
         alumno_nombre,
-        fecha
+        asistencia_fecha
     };
     colocarDatos(dataset);
 };
 const colocarDatos = (dataset) => {
     formulario.grado_id.value = dataset.grado;
-    //formulario.seccion_id.value = dataset.seccion;
-    //formulario.grado_nombre.value = dataset.grado_nombre;
+    formulario.grado_nombre.value = dataset.grado_nombre;
+    formulario.seccion_id.value = dataset.seccion_id;
     formulario.seccion_nombre.value = dataset.seccion_nombre;
-    //formulario.alumno_id.value = dataset.alumno;
+    formulario.alumno_id.value = dataset.alumno_id;
     formulario.alumno_nombre.value = dataset.alumno_nombre;
-    formulario.asistencia_fecha.value = dataset.fecha;
+    formulario.asistencia_fecha.value = dataset.asistencia_fecha;
     formulario.asistencia_id.value = dataset.id;
 
     btnGuardar.disabled = true;

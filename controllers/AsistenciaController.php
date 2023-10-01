@@ -6,6 +6,7 @@ use Exception;
 use Model\Profesor;
 use Model\Tutor;
 use Model\Alumno;
+use Model\Asignacion;
 use Model\Asistencia;
 use Model\Grado;
 use Model\Seccion;
@@ -254,16 +255,22 @@ public static function buscarGradosSeccionesAPI(){
         // Verificar si se proporcionaron tanto el grado como la sección
         if ($grado_id !== '' && $seccion_id !== '') {
 
-    $sql = "SELECT grados.grado_nombre, secciones.seccion_nombre, alumnos.alumno_nombre 
-            FROM grados 
-            INNER JOIN asignacion_grados ON grados.grado_id = asignacion_grados.grado_id 
-            INNER JOIN secciones ON asignacion_grados.seccion_id = secciones.seccion_id 
-            INNER JOIN alumnos ON asignacion_grados.alumno_id = alumnos.alumno_id 
-            WHERE grados.grado_situacion = 1 AND secciones.seccion_situacion = 1 AND alumnos.alumno_situacion = 1";
+    // $sql = "SELECT grados.grado_nombre, secciones.seccion_nombre, alumnos.alumno_nombre
+    // FROM asignacion_grados
+    // JOIN alumnos ON asignacion_grados.alumno_id = alumnos.alumno_id
+    // JOIN grados ON asignacion_grados.grado_id = grados.grado_id
+    // JOIN secciones ON asignacion_grados.seccion_id = secciones.seccion_id;
+    // ";
 
 
+$sql = "SELECT grados.grado_nombre, secciones.seccion_nombre, alumnos.alumno_nombre
+        FROM asignacion_grados, alumnos, grados, secciones
+        WHERE asignacion_grados.alumno_id = alumnos.alumno_id
+        AND asignacion_grados.grado_id = grados.grado_id
+        AND asignacion_grados.seccion_id = secciones.seccion_id
+        AND grados.grado_id = " . $grado_id . " AND secciones.seccion_id = " . $seccion_id;
       
-    $resultado = Grado::fetchArray($sql);
+    $resultado = Asignacion::fetchArray($sql);
 
     echo json_encode($resultado);
     } else {
