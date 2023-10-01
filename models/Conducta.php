@@ -4,7 +4,7 @@ namespace Model;
 
 class Conducta extends ActiveRecord {
     protected static $tabla = 'conducta';
-    protected static $columnasDB = ['conducta_id', 'alumno_id', 'conducta_fecha', 'conducta_descripcion', 'conducta_situacion'];
+    protected static $columnasDB = ['alumno_id', 'conducta_fecha', 'conducta_descripcion', 'conducta_situacion'];
     protected static $idTabla = 'conducta_id';
     
     public $conducta_id;

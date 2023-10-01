@@ -11,14 +11,14 @@ const btnModificar = document.getElementById('btnModificar');
 const btnCancelar = document.getElementById('btnCancelar');
 const divTabla = document.getElementById('tablaConducta'); 
 
-if (btnGuardar) {
+
     btnModificar.disabled = true;
     btnModificar.parentElement.style.display = 'none';
     btnCancelar.disabled = true;
     btnCancelar.parentElement.style.display = 'none';
     btnBuscar.disabled = true;
     btnBuscar.parentElement.style.display = 'none';
-}
+
 
 let contador = 1;
 const datatable = new Datatable('#tablaConducta', {
@@ -39,7 +39,7 @@ const datatable = new Datatable('#tablaConducta', {
         },
         {
             title: 'DESCRIPCIÓN', 
-            data: 'conducta_descripcion' 
+            data: 'conducta_descripcion'
         },
         {
             title: 'MODIFICAR',
@@ -60,10 +60,11 @@ const datatable = new Datatable('#tablaConducta', {
 });
 
 const buscar = async () => {
-    let conducta_id = formulario.conducta_id.value; 
-    console.log('test: "' + conducta_id + '"');
+    let alumno_id = formulario.alumno_id.value; 
+    let conducta_fecha = formulario.conducta_fecha.value; 
+    console.log('test: "' + alumno_id + '"'+ conducta_fecha );
 
-    const url = `/examen_escuela/API/conductas/buscar?conducta_nombre=${conducta_nombre}`; 
+    const url = `/examen_escuela/API/conductas/buscar?alumno_id=${alumno_id}&conducta_fecha=${conducta_fecha}`; 
     const config = {
         method: 'GET'
     };
@@ -71,6 +72,7 @@ const buscar = async () => {
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
+        console.log(data);
 
         datatable.clear().draw();
         if (data) {
@@ -221,10 +223,9 @@ const traeDatos = (e) => {
 };
 
 const colocarDatos = (dataset) => {
-    formulario.conducta_nombre.value = dataset.nombre;
-    formulario.conducta_edad.value = dataset.edad;
-    formulario.conducta_sexo.value = dataset.sexo;
-    formulario.conducta_fecha_nacimiento.value = dataset.nacimiento;
+    formulario.alumno_id.value = dataset.alumno;
+    formulario.conducta_fecha.value = dataset.fecha;
+    formulario.conducta_descripcion.value = dataset.descripcion;
     formulario.conducta_id.value = dataset.id;
 
     btnGuardar.disabled = true;
@@ -248,7 +249,7 @@ const modificar = async () => {
     }
     const body = new FormData(formulario);
 
-    const url = '/examen_escuela/API/alumnos/modificar';
+    const url = '/examen_escuela/API/conductas/modificar';
 
     const config = {
         method: 'POST',

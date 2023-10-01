@@ -52,24 +52,20 @@ class ConductaController {
 
     public static function buscarAPI() {
 
-        $alumno_id = $_GET['alumno_id'];
+        $alumno_id = $_GET['alumno_id'] ?? '';
         $conducta_fecha = $_GET['conducta_fecha'] ?? '';
-        $conducta_descripcion = $_GET['conducta_descripcion'] ?? '';
 
 
-        $sql = "SELECT * FROM conducta inner join alumnos on alumno_id = alumno_id WHERE conducta_situacion = 1 ";
+        $sql = "SELECT * FROM conducta c inner join alumnos a on a.alumno_id = c.alumno_id WHERE c.conducta_situacion = 1 ";
 
         if ($alumno_id != '') {
-            $sql .= " AND alumno_id LIKE '%$alumno_id%'";
+            $sql .= " AND a.alumno_id LIKE '%${alumno_id}%'";
         }
 
         if ($conducta_fecha != '') {
-            $sql .= " AND conducta_fecha LIKE '%$conducta_fecha%'";
+            $sql .= " AND c.conducta_fecha LIKE '%${conducta_fecha}%'";
         }
-        if ($conducta_descripcion != '') {
-            $conducta_descripcion = strtolower($conducta_descripcion);
-            $sql .= " AND LOWER(conducta_descripcion) LIKE '%$conducta_descripcion%' ";
-        }
+       
 
         try {
             $conductas = Conducta::fetchArray($sql);
