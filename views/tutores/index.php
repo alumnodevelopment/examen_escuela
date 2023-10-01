@@ -15,7 +15,12 @@
         <div class="row mb-3">
             <div class="col">
                 <label for="tutor_parentezco">Parentezco</label>
-                <input type="text" name="tutor_parentezco" id="tutor_parentezco" class="form-control">
+                <select name="tutor_parentezco" id="tutor_parentezco" class="form-control">
+                    <option value="">Seleccione una opción</option>
+                    <option value="TUTOR LEGAL">Tutor Legal</option>
+                    <option value="PADRE">Padre</option>
+                    <option value="MADRE">Madre</option>
+                </select>
             </div>
             <div class="row mb-3">
                 <div class="col">
