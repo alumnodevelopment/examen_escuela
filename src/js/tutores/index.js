@@ -288,4 +288,8 @@ datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);
 
 
+
+////aqui finaliza el js del manejo de tu
+
 ////aqui finaliza el js del manejo de tutores
+

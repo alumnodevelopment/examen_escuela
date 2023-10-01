@@ -1,6 +1,7 @@
 <?php
-namespace Controllers;
 
+namespace Controllers;
+ 
 use Exception;
 use Model\Grado;
 use MVC\Router;
