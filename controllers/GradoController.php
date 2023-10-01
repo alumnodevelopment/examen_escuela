@@ -1,19 +1,15 @@
- <?php
+<?php
 
 namespace Controllers;
-
+ 
 use Exception;
 use Model\Grado;
 use MVC\Router;
 
 class GradoController
 {
-    public static function datatable(Router $router){
-        if(isset($_SESSION['auth_user'])){
-        $router->render('grados/datatable', []);
-    }else{
-        header('Location: /examen_escuela/');
-    }
+    public static function index(Router $router){
+        $router->render('grados/index', []);
     }
 
     public static function guardarAPI()

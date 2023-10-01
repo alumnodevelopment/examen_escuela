@@ -5,9 +5,7 @@ import Datatable from "datatables.net-bs5";
 import { lenguaje  } from "../lenguaje";
 
 
-
-
-const formulario = document.querySelector('form');
+const formulario = document.getElementById('formularioAsistencia');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
@@ -19,53 +17,53 @@ btnCancelar.disabled = true;
 btnCancelar.parentElement.style.display = 'none';
 
 let contador = 1;
-const datatable = new Datatable('#tablaTutor', {
+const datatable = new Datatable('#tablaAsistencia', {
     language: lenguaje,
     data: null,
     columns: [
         {
             title: 'NO',
             render: () => contador++
-        },
+        }, 
         {
-            title: 'Nombre del Tutor',
-            data: 'tutor_nombre'
-        },
-        {
-            title: 'Teléfono',
-            data: 'tutor_telefono'
-        },
-        {
-            title: 'Parentezco',
-            data: 'tutor_parentezco'
-        },
-        {
-            title: 'ID del Alumno',
+            title: 'Nombre del Alumno',
             data: 'alumno_id'
+        },   
+        {
+            title: 'Fecha de la asistencia',
+            data: 'asistencia_fecha'
+            
         },
+        {
+            title: 'Asistencia',
+            data: 'asistencia_asistio'
+
+        }, 
         {
             title: 'MODIFICAR',
-            data: 'tutor_id',
+            data: 'asistencia_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["tutor_nombre"]}' data-telefono='${row["tutor_telefono"]}' data-parentezco='${row["tutor_parentezco"]}' data-alumno='${row["alumno_id"]}'>Modificar</button>`
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-nombre='${row["alumno_id"]}'
+            data-fecha='${row["asistencia_fecha"]}' data-asistio='${row["asistencia_asistio"]}'>Modificar</button>`
         },
         {
             title: 'ELIMINAR',
-            data: 'tutor_id',
+            data: 'asistencia_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
-        }
+            render: (data, type, row, meta) => `<button class="btn btn-danger" data-id='${data}' >Eliminar</button>`
+        },
     ]
 });
+
 
 // Después de cargar la página, obtener los datos de los alumnos y llenar el select
 document.addEventListener("DOMContentLoaded", async () => {
     const alumnoSelect = document.getElementById("alumno_id");
 
     try {
-        const respuesta = await fetch('/examen_escuela/API/tutores/buscarAlumno');
+        const respuesta = await fetch('/examen_escuela/API/asistencia/buscarAlumno');
         const alumnos = await respuesta.json();
 
         alumnos.forEach(alumno => {
@@ -79,26 +77,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-const buscar = async () => {
-    const tutorNombre = formulario.tutor_nombre.value;
-    const url = `/examen_escuela/API/tutores/buscar?tutor_nombre=${tutorNombre}`;
-    try {
-        const respuesta = await fetch(url);
-        const data = await respuesta.json();
-        datatable.clear().draw();
-        if (data) {
-            contador = 1;
-            datatable.rows.add(data).draw();
-        } else {
-            Toast.fire({
-                title: 'No se encontraron registros',
-                icon: 'info'
-            });
-        }
-    } catch (error) {
-        console.error(error);
-    }
-};
+
+
 
 const guardar = async (evento) => {
     evento.preventDefault();
@@ -108,36 +88,25 @@ const guardar = async (evento) => {
     const alumnoId = alumnoSelect.value;
 
     // Obtener otros valores del formulario
-    const tutorNombre = document.getElementById("tutor_nombre").value;
-    const tutorTelefono = document.getElementById("tutor_telefono").value;
-    const tutorParentezco = document.getElementById("tutor_parentezco").value;
+    const asistencia_fecha = document.getElementById("asistencia_fecha").value;
+    const asistencia_asistio = document.getElementById("asistencia_asistio").value;
 
-    if (alumnoSelect.value === "" || tutorNombre === "" || tutorTelefono === "" || tutorParentezco === "") {
+
+    if (alumnoSelect.value === "" || asistencia_fecha === "" || asistencia_asistio === "") {
         Toast.fire({
             icon: 'info',
             text: 'Por favor, llene todos los campos'
         });
         return;
     }
-
-
-    // if (!validarFormulario(formulario)) {
-    //     Toast.fire({
-    //         icon: 'info',
-    //         text: 'Debe llenar todos los datos'
-    //     });
-    //     return;
-    // }
-
     const formData = new FormData();
-    formData.append("tutor_nombre", tutorNombre);
-    formData.append("tutor_telefono", tutorTelefono);
-    formData.append("tutor_parentezco", tutorParentezco);
+    formData.append("asistencia_fecha", asistencia_fecha);
+    formData.append("asistencia_asistio", asistencia_asistio);
     formData.append("alumno_id", alumnoId);
 
     
     const body = new FormData(formulario);
-    const url = '/examen_escuela/API/tutores/guardar';
+    const url = '/examen_escuela/API/asistencia/guardar';
     try {
         const respuesta = await fetch(url, {
             method: 'POST',
@@ -162,25 +131,33 @@ const guardar = async (evento) => {
     }
 };
 
-const traeDatos = (e) => {
-    const button = e.target;
-    const id = button.dataset.id;
-    const nombre = button.dataset.nombre;
-    const telefono = button.dataset.telefono;
-    const parentezco = button.dataset.parentezco;
-    const alumno = button.dataset.alumno;
 
 
-    const dataset = {
-        id,
-        nombre,
-        telefono,
-        parentezco,
-        alumno,
-      
-    };
-    colocarDatos(dataset);
+const buscar = async () => {
+    const alumno_id = formulario.alumno_id.value;
+    const asistencia_fecha = formulario.asistencia_fecha.value;
+
+    const url = `/examen_escuela/API/asistencia/buscar?alumno_id=${alumno_id}&asistencia_fecha=${asistencia_fecha}`;
+    try {
+        const respuesta = await fetch(url);
+        const data = await respuesta.json();
+        datatable.clear().draw();
+        if (data) {
+            contador = 1;
+            datatable.rows.add(data).draw();
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.error(error);
+    }
 };
+
+
+
 
 const modificar = async (evento) => {
     evento.preventDefault();
@@ -192,7 +169,7 @@ const modificar = async (evento) => {
         return;
     }
     const body = new FormData(formulario);
-    const url = '/examen_escuela/API/tutores/modificar';
+    const url = '/examen_escuela/API/asistencia/modificar';
     try {
         const respuesta = await fetch(url, {
             method: 'POST',
@@ -223,8 +200,8 @@ const eliminar = async (e) => {
     const id = button.dataset.id;
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('tutor_id', id);
-        const url = '/examen_escuela/API/tutores/eliminar';
+        body.append('asistencia_id', id);
+        const url = '/examen_escuela/API/asistencia/eliminar';
         try {
             const respuesta = await fetch(url, {
                 method: 'POST',
@@ -249,14 +226,32 @@ const eliminar = async (e) => {
     }
 };
 
+const traeDatos = (e) => {
+    const button = e.target;
+    const id = button.dataset.id;
+    const alumno_id = button.dataset.alumno_id;
+    const asistencia_fecha = button.dataset.asistencia_fecha;
+    const asistencia_asistio = button.dataset.asistencia_asistio;
+
+
+    const dataset = {
+        id,
+        alumno_id,
+        asistencia_fecha,
+        asistencia_asistio
+    };
+  
+    colocarDatos(dataset);
+};
+
+
 
 
 const colocarDatos = (dataset) => {
-    formulario.tutor_nombre.value = dataset.nombre;
-    formulario.tutor_telefono.value = dataset.telefono;
-    formulario.tutor_parentezco.value = dataset.parentezco;
-    formulario.alumno_id.value = dataset.alumno;
-    formulario.tutor_id.value = dataset.id;
+    formulario.alumno_id.value = dataset.alumno_id;
+    formulario.asistencia_fecha.value = dataset.asistencia_fecha;
+    formulario.asistencia_asistio.value = dataset.asistencia_asistio;
+    formulario.asistencia_id.value = dataset.id;
 
     btnGuardar.disabled = true;
     btnGuardar.parentElement.style.display = 'none';
@@ -267,6 +262,7 @@ const colocarDatos = (dataset) => {
     btnCancelar.disabled = false;
     btnCancelar.parentElement.style.display = '';
 };
+
 
 const cancelarAccion = () => {
     formulario.reset();
@@ -280,16 +276,34 @@ const cancelarAccion = () => {
     btnCancelar.parentElement.style.display = 'none';
 };
 
+
+// const buscarAlumnos = async () => {
+  
+
+//     const url = `/examen_escuela/API/asistencia/buscarAlumnos`;
+//     try {
+//         const respuesta = await fetch(url);
+//         const data = await respuesta.json();
+//         datatable.clear().draw();
+//         if (data) {
+//             contador = 1;
+//             datatable.rows.add(data).draw();
+//         } else {
+//             Toast.fire({
+//                 title: 'No se encontraron registros',
+//                 icon: 'info'
+//             });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
+
+
+//buscarAlumnos();
 formulario.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
 btnModificar.addEventListener('click', modificar);
 datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);
-
-
-
-////aqui finaliza el js del manejo de tu
-
-////aqui finaliza el js del manejo de tutores
-
