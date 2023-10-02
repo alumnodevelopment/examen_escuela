@@ -8,16 +8,14 @@ use MVC\Router;
 
 class UsuarioController {
     public static function login(Router $router){
-        if(!isset($_SESSION['tipo_usuario'])){
-            header('Location: /examen_escuela/');
+        if(!isset($_SESSION['tipo'])){
             $router->render('login/index', []);
         }else{
             header('Location: /examen_escuela/');
         }
     }
     public static function registro(Router $router){
-        if(!isset($_SESSION['tipo_usuario'])){
-            header('Location: /examen_escuela/registro');
+        if(!isset($_SESSION['tipo'])){
             $router->render('usuarios/index', []);
         }else{
             header('Location: /examen_escuela/');
