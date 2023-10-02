@@ -36,11 +36,11 @@
         <tbody>
             <?php foreach ($pagos as $pago) : ?>
                 <tr>
-                    <td><?= $pago->pago_fecha ?></td>
-                    <td><?= $pago->alumno_nombre ?></td>
-                    <td><?= $pago->pago_mes ?></td>
-                    <td><?= $pago->pago_monto ?></td>
-                    <td><?= $pago->pago_solvencia ?></td>
+                    <td><?= $pago['pago_fecha'] ?></td>
+                    <td><?= $pago['alumno_nombre'] ?></td>
+                    <td><?= $pago['pago_mes'] ?></td>
+                    <td><?= $pago['pago_monto'] ?></td>
+                    <td><?= $pago['pago_solvencia'] ?></td>
                     
                 </tr>
             <?php endforeach; ?>
