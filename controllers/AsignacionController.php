@@ -1,5 +1,4 @@
 <?php
-
 namespace Controllers;
 
 use Exception;
@@ -222,7 +221,3 @@ public static function buscarProfesor(){
 
 
 }
-
-
-
-

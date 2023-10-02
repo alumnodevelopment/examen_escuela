@@ -20,6 +20,7 @@ class AlumnoController{
             ]);
         }
     }
+    
 
     public static function guardarAPI()
 {

@@ -111,5 +111,5 @@ class UsuarioController {
         header('Location: /examen_escuela/');
     }
 
-}
+} 
 

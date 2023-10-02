@@ -28,7 +28,7 @@
                     </li>
   
                     <div class="nav-item dropdown " >
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/alumnos" data-bs-toggle="dropdown">
                             <i class="bi bi-gear me-2"></i>ALUMNOS
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
@@ -40,12 +40,15 @@
                                 <a class="dropdown-item nav-link text-white " href="/examen_escuela/asistencia"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>ASISTENCIA DE ALUMNOS</a>
                             </li>
                             <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/conductas"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRAR CONDUCTA ALUMNO</a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item nav-link text-white " href="/examen_escuela/pdfconductas"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>GENERAR REPORTE CONDUCTA</a>
                             </li>
                         </ul>
                     </div>
                     <div class="nav-item dropdown " >
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/profesores" data-bs-toggle="dropdown">
                             <i class="bi bi-gear me-2"></i>PROFESORES
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
@@ -65,7 +68,7 @@
                         </ul>
                     </div>
                     <div class="nav-item dropdown " >
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/grados" data-bs-toggle="dropdown">
                             <i class="bi bi-gear me-2"></i>GRADOS Y SECCIONES
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
@@ -82,7 +85,7 @@
                         </ul>
                     </div>
                     <div class="nav-item dropdown " >
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/tutores" data-bs-toggle="dropdown">
                             <i class="bi bi-gear me-2"></i>TUTORES
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
@@ -96,7 +99,18 @@
                         </ul>
                     </div>
                     <div class="nav-item dropdown " >
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/pagos" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>PAGOS Y SOLVENCIA
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <!-- <h6 class="dropdown-header">Información</h6> -->
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pagos"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE PAGOS Y SOLVENCIA</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/usuarios" data-bs-toggle="dropdown">
                             <i class="bi bi-gear me-2"></i>LOGIN Y REGISTRO
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
