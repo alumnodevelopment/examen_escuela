@@ -14,6 +14,7 @@ use Controllers\SeccionController;
 use Controllers\TutorController;
 use Controllers\AsignacionController;
 use Controllers\ReporteConductaController;
+use Controllers\ReporteAsistenciaController;
 
 
 
@@ -91,6 +92,11 @@ $router->get('/API/conductas/buscar', [ConductaController::class,'buscarAPI'] );
 $router->get('/pdfconductas', [ReporteConductaController::class,'index']);
 $router->get('/API/pdfconductas/buscar', [ReporteConductaController::class,'buscarAPI'] );
 $router->post('/ReporteConducta/generarPDF', [ReporteConductaController::class, 'generarPDF']);
+
+$router->get('/pdfasistencias', [ReporteAsistenciaController::class,'index']);
+$router->get('/API/pdfasistencias/buscar', [ReporteAsistenciaController::class,'pdf'] );
+// $router->get('/reporteAsistencia/generarPDF', [ReporteAsistenciaController::class, 'pdf']);
+
 
 
 $router->get('/secciones', [SeccionController::class,'index'] );

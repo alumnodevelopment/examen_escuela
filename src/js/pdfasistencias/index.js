@@ -4,57 +4,28 @@ import { validarFormulario, Toast, confirmacion } from "../funciones";
 import { lenguaje } from "../lenguaje";
 import Datatable from "datatables.net-bs5";
 
-const formulario = document.getElementById('formularioConducta'); 
+const formulario = document.getElementById('formularioAsistencia'); 
 const btnBuscar = document.getElementById('btnBuscar');
-const divTabla = document.getElementById('tablaConducta'); 
-
 
 const buscar = async () => {
-    let alumno_id = formulario.alumno_id.value; 
-    let conducta_fecha = formulario.conducta_fecha.value; 
+    let grado_id = formulario.grado_id.value; 
+    let seccion_id = formulario.seccion_id.value; 
+    let asistencia_fecha = formulario.asistencia_fecha.value;    
 
-    const url = `/examen_escuela/API/pdfconductas/buscar?alumno_id=${alumno_id}&conducta_fecha=${conducta_fecha}`; 
-
-    try {
-        const respuesta = await fetch(url);
-        const data = await respuesta.json();
-
-        datatable.clear().draw();
-        if (data && data.length > 0) {
-            contador = 1;
-            datatable.rows.add(data).draw();
-            generarPDF(data);
-            formulario.reset();
-        } else {
-            Toast.fire({
-                title: 'No se encontraron registros',
-                icon: 'info'
-            });
-        }
-    } catch (error) {
-        console.error('Error al obtener datos:', error);
-    }
-};
-
-
-const generarPDF = async (datos) => {
-    const url = `/examen_escuela/ReporteConducta/generarPDF`;
+    const url = `/examen_escuela/API/pdfasistencias/buscar?grado_id=${grado_id}&seccion_id=${seccion_id}&asistencia_fecha=${asistencia_fecha}`; 
+    const config = {
+        method: 'GET'
+    };
 
     try {
-        const respuesta = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(datos),
-        });
+        const respuesta = await fetch(url, config);
 
         if (respuesta.ok) {
             const blob = await respuesta.blob();
 
             if (blob) {
                 const urlBlob = window.URL.createObjectURL(blob);
-                // Abre el PDF en una nueva ventana o pestaña
+
                 window.open(urlBlob, '_blank');
             } else {
                 console.error('No se pudo obtener el blob del PDF.');
@@ -63,11 +34,12 @@ const generarPDF = async (datos) => {
             console.error('Error al generar el PDF.');
         }
     } catch (error) {
-        console.error('Error al generar el PDF:', error);
+        console.error(error);
     }
 };
 
+
 if (formulario) {
     btnBuscar.addEventListener('click', buscar);
-    datatable.on('click', '.btn-warning', traeDatos);
+    
 }

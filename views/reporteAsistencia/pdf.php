@@ -55,14 +55,7 @@
         margin-top: 0;
     }
 </style>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <table class="styled-table">
     <thead>
         <tr>
@@ -71,15 +64,19 @@
             <th>CANTIDAD_ALUMNOS</th>
             <th>PRESENTES</th>
             <th>AUSENTES</th>
+            <th>FECHA</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($asistencias as $asistencia) : ?>
-            <tr>
-                <td><?= $asistencia->grado_nombre ?></td>
-                <td><?= $asistencia->seccion_nombre ?></td>
-                <td><?= $asistencia->asistencia_asistio ?></td>
-                <td><?= $asistencia->asistencia_asistio ?></td>
+            <tr>                
+                
+                <td><?= $asistencia['grado_nombre'] ?></td>
+                <td><?= $asistencia['seccion_nombre']?></td>
+                <td><?= $asistencia['conteo']?></td>
+                <td><?= $asistencia['presentes']?></td>
+                <td><?= $asistencia['ausentes']?></td>
+                <td><?= $asistencia['asistencia_fecha']?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

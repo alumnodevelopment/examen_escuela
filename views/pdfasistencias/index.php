@@ -1,37 +1,40 @@
 <h1 class="text-center">Registro de Conducta de los Alumnos</h1>
 <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <form class="border bg-light p-3" id="formularioConducta">
-                <div class="mb-3">                        
-                        <input type="hidden" name="conducta_id" id="conducta_id" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="alumno_id" class="form-label">Seleccione un alumno:</label>
-                        <select name="alumno_id" id="alumno_id" class="form-select">
-                            <option value="">Seleccione un alumno</option>
-                            <?php foreach ($alumnos as $alumno) { ?>
-                                <option value="<?= $alumno['alumno_id'] ?>"><?= $alumno['alumno_nombre'] ?></option>
-                            <?php } ?>
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <form class="border bg-light p-3" id="formularioAsistencia">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="grado_id">GRADO</label>
+                        <select name="grado_id" id="grado_id" class="form-control">
+                            <option value="">SELECCIONE...</option>
+                            <?php foreach ($grados as $grado) : ?>
+                                <option value="<?= $grado['grado_id'] ?>">
+                                    <?= $grado['grado_nombre'] ?></option>
+                            <?php endforeach ?>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="conducta_fecha" class="form-label">Fecha de registro de la conducta:</label>
-                        <input type="date" name="conducta_fecha" id="conducta_fecha" class="form-control">
-            <div class="row ">
-                <div class="col">
-                    <button type="button" id="btnBuscar" class="btn btn-info btn-block">Buscar</button>
                 </div>
-            </div>
-        </form>
-    </div>
-    <h1>Historial de Conducta de los alumnos</h1>
-    <div class="row justify-content-center">
-        <div class="col table-responsive">
-            <table id="tablaConducta" class="table table-bordered table-hover">
-                <!-- Contenido de la tabla aquí -->
-            </table>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="seccion_id">SECCION</label>
+                        <select name="seccion_id" id="seccion_id" class="form-control">
+                            <option value="">SELECCIONE...</option>
+                            <?php foreach ($secciones as $seccion) : ?>
+                                <option value="<?= $seccion['seccion_id'] ?>">
+                                    <?= $seccion['seccion_nombre'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="asistencia_fecha" class="form-label">Fecha de asistenca:</label>
+                    <input type="date" name="asistencia_fecha" id="asistencia_fecha" class="form-control">
+                    <div class="row ">
+                        <div class="col">
+                            <button type="button" id="btnBuscar" class="btn btn-info btn-block">Buscar</button>
+                        </div>
+                    </div>
+            </form>
         </div>
-    </div>
-</div>
-<script src="<?= asset('./build/js/pdfasistencias/index.js') ?>"></script> 
+        <script src="<?= asset('./build/js/pdfasistencias/index.js') ?>"></script>
