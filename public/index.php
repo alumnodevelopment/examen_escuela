@@ -14,13 +14,20 @@ use Controllers\SeccionController;
 use Controllers\TutorController;
 use Controllers\AsignacionController;
 use Controllers\ReporteConductaController;
-
+use Controllers\UsuarioController;
 
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
 
 $router->get('/', [AppController::class,'index']);
+
+$router->get('/login', [UsuarioController::class,'login']);
+$router->post('/API/login/ingresar', [UsuarioController::class,'loginAPI']);
+$router->post('/API/usuarios/guardar', [UsuarioController::class, 'guardarAPI']);
+$router->get('/registro', [UsuarioController::class,'registro']);
+
+
 
 $router->get('/alumnos', [AlumnoController::class, 'index']);
 $router->get('/API/alumnos/buscar', [AlumnoController::class, 'buscarAPI']);
