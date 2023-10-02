@@ -94,7 +94,7 @@
                                 <a class="dropdown-item nav-link text-white " href="/examen_escuela/tutores"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE PADRES O TUTORES</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pagos"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>ASISTENCIA DE ALUMNOS</a>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pagos"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE PAGOS Y SOLVENCIA</a>
                             </li>
                         </ul>
                     </div>
@@ -127,7 +127,9 @@
                 </ul> 
                 <div class="col-lg-1 d-grid mb-lg-0 mb-2">
                     <!-- Ruta relativa desde el archivo donde se incluye menu.php -->
-                    <a href="/examen_escuela/" class="btn btn-danger"><i class="bi bi-arrow-bar-left"></i>MENÚ</a>
+                    <!-- <button class="btn btn-danger" type="submit" id="logout"
+                            name="logout"><i class="bi bi-arrow-bar-left"></i>CERRAR SESIÓN</button> -->
+                    <a href="/examen_escuela/" class="btn btn-danger"><i class="bi bi-arrow-bar-left"></i>SALIR</a>
                 </div>
 
             

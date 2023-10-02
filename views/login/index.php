@@ -19,7 +19,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="usuario_password" class="form-label">Contraseña</label>
-                    <input type="text" class="form-control" id="usuario_password" name="usuario_password">
+                    <input type="password" class="form-control" id="usuario_password" name="usuario_password">
                 </div>
             </div>
             <div class="d-grid">
