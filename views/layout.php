@@ -65,6 +65,9 @@
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/examen_escuela/actividades"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>INGRESAR ACTIVIDADES</a>
                             </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pdfasistencias"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>GENERAR REPORTE ASISTENCIA</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="nav-item dropdown " >
