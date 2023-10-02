@@ -16,7 +16,8 @@ module.exports = {
     'js/pdfconductas/index' : './src/js/pdfconductas/index.js',
     'js/asistencia/index' : './src/js/asistencia/index.js',
     'js/asignaciones/index' : './src/js/asignaciones/index.js',
-    'js/actividades/index' : './src/js/actividades/index.js',  
+    'js/actividades/index' : './src/js/actividades/index.js',
+    'js/pdfasistencias/index' : './src/js/pdfasistencias/index.js',
     'js/usuarios/index' : './src/js/usuarios/index.js',    
     'js/login/index' : './src/js/login/index.js',
 

@@ -12,7 +12,7 @@ class ReportePagoController
     public static function getPago($id_pago){
         $sql="select * from pagos
         inner join alumnos on pago_alumno_id = alumno_id
-        where pago_id = ${id_pago} ";
+        where pago_id = $id_pago ";
 
         $pagosArray= Pago::fetchArray($sql);
 
