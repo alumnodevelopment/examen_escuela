@@ -9,11 +9,18 @@ use MVC\Router;
 class AlumnoController{
     public static function index(Router $router) {
     
-        $alumnos = Alumno::all();
-        $router->render('alumnos/index', [
-            'alumnos' => $alumnos,
-        ]);
+        $alumnos = Alumno::all();        
+       
+        if(!isset($_SESSION['tipo'])){
+            header('Location: /examen_escuela/');
+            $router->render('login/index', []);
+        }else{
+            $router->render('alumnos/index', [
+                'alumnos' => $alumnos,
+            ]);
+        }
     }
+    
 
     public static function guardarAPI()
 {

@@ -62,6 +62,13 @@ const datatable = new Datatable('#tablaPagos', {
             orderable: false,
             render: (data, type, row, meta) => `<button class="btn btn-danger" data-id='${data}' >Eliminar</button>`
         },
+        {
+            title: 'IMPRIMIR',
+            data: 'pago_id',
+            searchable: false,
+            orderable: false,
+            render: (data, type, row, meta) => `<button class="btn btn-success" data-id='${data}' >Imprimir Solvencia</button>`
+        },
     ]
 });
 
@@ -193,6 +200,40 @@ const eliminar = async (e) => {
     }
 };
 
+
+const imprimir = async (e) => {
+    const button = e.target;
+    const id = button.dataset.id;
+    console.log(id);
+
+    if (await confirmacion('warning', '¿Desea imprimir la solvencia de este alumno?')) {
+        const url = `/examen_escuela/API/reportePagos/generar?id_pago=${id}`;
+        const config = {
+            method: 'GET'
+        };
+
+        try {
+            const respuesta = await fetch(url, config);
+    
+            if (respuesta.ok) {
+                const blob = await respuesta.blob();
+    
+                if (blob) {
+                    const urlBlob = window.URL.createObjectURL(blob);
+    
+                    window.open(urlBlob, '_blank');
+                } else {
+                    console.error('No se pudo obtener el blob del PDF.');
+                }
+            } else {
+                console.error('Error al generar el PDF.');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+};
+
 const cancelarAccion = () => {
     btnGuardar.disabled = false;
     btnGuardar.parentElement.style.display = '';
@@ -316,4 +357,5 @@ if (formulario) {
     btnModificar.addEventListener('click', modificar);
     datatable.on('click', '.btn-warning', traeDatos);
     datatable.on('click', '.btn-danger', eliminar);
+    datatable.on('click', '.btn-success', imprimir);
 }

@@ -45,6 +45,10 @@ const buscar = async () => {
 
         datatable.clear().draw();
         if (data && data.length > 0) {
+            Toast.fire({
+                title: 'Se esta generando el pdf',
+               icon: 'success'
+              });
             contador = 1;
             datatable.rows.add(data).draw();
             generarPDF(data);

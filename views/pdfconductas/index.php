@@ -1,4 +1,4 @@
-<h1 class="text-center">Registro de Conducta de los Alumnos</h1>
+<h1 class="text-center">Busqueda para generar el reporte de Conducta de los Alumnos</h1>
 <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
