@@ -10,13 +10,36 @@ use Controllers\AlumnoController;
 use Controllers\AsistenciaController;
 use Controllers\ProfesorController;
 use Controllers\PagoController;
+
+use Controllers\SeccionController;
+use Controllers\TutorController;
+use Controllers\AsignacionController;
+use Controllers\ReporteConductaController;
+use Controllers\UsuarioController;
+
 use Controllers\ReportePagoController;
+
 
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
 
 $router->get('/', [AppController::class,'index']);
+
+
+$router->get('/login', [UsuarioController::class,'login']);
+$router->post('/API/login/ingresar', [UsuarioController::class,'loginAPI']);
+$router->post('/API/usuarios/guardar', [UsuarioController::class, 'guardarAPI']);
+
+$router->get('/registro', [UsuarioController::class,'registro']);
+
+
+
+//$router->get('/alumnos', [AlumnoController::class, 'index']);
+//$router->get('/API/alumnos/buscar', [AlumnoController::class, 'buscarAPI']);
+//$router->post('/API/alumnos/guardar', [AlumnoController::class, 'guardarAPI']);
+//$router->post('/API/alumnos/modificar', [AlumnoController::class, 'modificarAPI']);
+//$router->post('/API/alumnos/eliminar', [AlumnoController::class, 'eliminarAPI']);
 
 
 $router->get('/API/reportePagos/generar', [ReportePagoController::class, 'pdf']);

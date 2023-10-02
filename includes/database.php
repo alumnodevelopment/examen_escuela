@@ -16,7 +16,6 @@ try {
     echo json_encode([
         "detalle" => $e->getMessage(),       
         "mensaje" => "Error de conexión bd",
-
         "codigo" => 5,
     ]);
     header('Location: /');
