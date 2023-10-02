@@ -24,21 +24,103 @@
                 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin: 0;">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/ejemplo/"><i class="bi bi-house-fill me-2"></i>Inicio</a>
+                        <a class="nav-link" aria-current="page" href="/examen_escuela/"><i class="bi bi-house-fill me-2"></i>Inicio</a>
                     </li>
   
                     <div class="nav-item dropdown " >
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-gear me-2"></i>Dropdown
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/alumnos" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>ALUMNOS
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
                             <!-- <h6 class="dropdown-header">Información</h6> -->
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/aplicaciones/nueva"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Subitem</a>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/alumnos"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE ALUMNOS</a>
                             </li>
-                        
-                    
-                        
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/asistencia"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>ASISTENCIA DE ALUMNOS</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/conductas"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRAR CONDUCTA ALUMNO</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pdfconductas"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>GENERAR REPORTE CONDUCTA</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/profesores" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>PROFESORES
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <!-- <h6 class="dropdown-header">Información</h6> -->
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/profesores"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE PROFESORES</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/asistencia"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>ASISTENCIA DE ALUMNOS</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pdfconductas"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>GENERAR REPORTE CONDUCTA</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/actividades"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>INGRESAR ACTIVIDADES</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/grados" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>GRADOS Y SECCIONES
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <!-- <h6 class="dropdown-header">Información</h6> -->
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/secciones"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE SECCIONES</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/grados"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE GRADOS</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/asignaciones"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>ASIGNAR GRADOS, SECCIONES, MAESTROS Y ALUMNOS</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/tutores" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>TUTORES
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <!-- <h6 class="dropdown-header">Información</h6> -->
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/tutores"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE PADRES O TUTORES</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pagos"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>ASISTENCIA DE ALUMNOS</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/pagos" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>PAGOS Y SOLVENCIA
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <!-- <h6 class="dropdown-header">Información</h6> -->
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/pagos"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO DE PAGOS Y SOLVENCIA</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="/examen_escuela/usuarios" data-bs-toggle="dropdown">
+                            <i class="bi bi-gear me-2"></i>LOGIN Y REGISTRO
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <!-- <h6 class="dropdown-header">Información</h6> -->
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/login"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>LOGIN</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/examen_escuela/registro"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>REGISTRO</a>
+                            </li>
                         </ul>
                     </div> 
 

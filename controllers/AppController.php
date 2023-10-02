@@ -6,7 +6,11 @@ use MVC\Router;
 
 class AppController {
     public static function index(Router $router){
-        $router->render('pages/index', []);
+        if(!isset($_SESSION['tipo'])){
+            $router->render('login/index', []);
+        }else{
+            $router->render('pages/index', []);
+        }
     }
 
 }
